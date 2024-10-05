@@ -1,0 +1,19 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/static/css/output.css" />
+        <link rel="stylesheet" href="/static/css/markdown.css" />
+        <script src="/static/js/index.js"></script>
+        <title>{{ .Title }} | Philthy Blog</title>
+    </head>
+    <body>
+        <div id="root">
+            <header class="flex flex-col p-4">
+                <h1 class="font-bold text-2xl">{{ .HeaderText }}</h1>
+                <p class="text-sm">{{ .SubText }}</p>
+            </header>
+            <main class="p-4 flex flex-col gap-4">{{.Content}}</main>
+        </div>
+    </body>
+</html>
