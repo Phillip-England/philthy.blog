@@ -1,6 +1,10 @@
-*10/3/2024 by Phillip England*
 
-## Why am I Writing?
+*10/3/2024 by Phillip England*
+# Why am I Writing?
+
+**TL;DR:** I am a former Christian, and I am here to connect with others regarding the Christian faith. My content is aimed at three different groups of people: those actively deconverting, those still in the faith, and those who wish to gain a practical understanding of how Christianity operates from the inside out. My main goal is to help others by sharing my story and providing insights wherever I can.
+
+## Finding my Why
 
 Hello, my name is Phillip England, and I am no longer a Christian. The process of my deconversion has been one of the most challenging things I've ever walked through. I went from being certain about everything, to feeling like I know nothing. My sense of self has been shattered, and I am still actively picking up the pieces of my life.
 
@@ -32,7 +36,7 @@ Remember, in the same way you think my perspective is harmful, I believe the sam
 
 In this way, we can relate. We are both doing what we feel is right. Our motivations are our common ground.
 
-Your prayers are welcome. If I am wrong, I would like to know. If the Christian faith is true, I would like to be educated by God. I am not resistant to believing in Christianity. In fact, I want to believe in Christianity. I just simply don't.
+Your prayers are welcomed. If I am wrong, I would like to know. If the Christian faith is true, I would like to be educated by God. I am not resistant to believing in Christianity. In fact, I *want* to believe in Christianity. I just simply don't.
 
 The path I am taking is not an easy decision. This is difficult for me. I've spent a year contemplating the direction I will take in my life. I've found time and time again the true source of my faith is fear. I am afraid to leave the faith. I am afraid to say something. I am afraid of being punished. And it takes great bravery to face these fears.
 

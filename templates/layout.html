@@ -3,17 +3,20 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/static/css/output.css" />
-        <link rel="stylesheet" href="/static/css/markdown.css" />
         <script src="/static/js/index.js"></script>
+        <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
         <title>{{ .Title }} | Philthy Blog</title>
     </head>
-    <body>
-        <div id="root">
-            <header class="flex flex-col p-4">
-                <h1 class="font-bold text-2xl">{{ .HeaderText }}</h1>
-                <p class="text-sm">{{ .SubText }}</p>
-            </header>
-            <main class="p-4 flex flex-col gap-4">{{.Content}}</main>
+    <body class="h-screen">
+        <div id="root" class="min-h-screen">
+            {{ template "header.html" . }} {{ template "navmenu.html" . }}
+            <main
+                class="flex-grow p-4 flex flex-col gap-4"
+                style="min-height: calc(100vh - 170px)"
+            >
+                {{.Content}}
+            </main>
+            {{ template "overlay.html" . }} {{ template "footer.html" . }}
         </div>
     </body>
 </html>

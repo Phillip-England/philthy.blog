@@ -1,0 +1,24 @@
+<nav
+    id="navmenu"
+    class="flex top-[85px] fixed bg-white w-[66%] h-full border-r z-40 hidden"
+>
+    <ul class="flex flex-col gap-2 p-2 w-full text-sm">
+        {{ if eq .CurrentPath "/" }}
+        <li class="rounded border w-full flex bg-gray-200">
+            <a class="w-full p-4" href="/">Home</a>
+        </li>
+        {{ else }}
+        <li class="rounded border w-full flex bg-white">
+            <a class="w-full p-4" href="/">Home</a>
+        </li>
+        {{ end }} {{ if eq .CurrentPath "/posts" }}
+        <li class="rounded border w-full flex bg-gray-200">
+            <a class="w-full p-4" href="/posts">Posts</a>
+        </li>
+        {{ else }}
+        <li class="rounded border w-full flex bg-white">
+            <a class="w-full p-4" href="/posts">Posts</a>
+        </li>
+        {{ end }}
+    </ul>
+</nav>
