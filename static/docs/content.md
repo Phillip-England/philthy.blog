@@ -1,6 +1,8 @@
 
-*10/3/2024 by Phillip England*
 # Why am I Writing?
+*10/3/2024 by Phillip England*
+![prison](./static/img/why.jpeg)
+
 
 **TL;DR:** I am a former Christian, and I am here to connect with others regarding the Christian faith. My content is aimed at three different groups of people: those actively deconverting, those still in the faith, and those who wish to gain a practical understanding of how Christianity operates from the inside out. My main goal is to help others by sharing my story and providing insights wherever I can.
 

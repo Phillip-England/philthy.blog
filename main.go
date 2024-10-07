@@ -105,6 +105,7 @@ func StyleMarkdownContent(mdContent string) string {
 	mdContent = strings.ReplaceAll(mdContent, "<h2>", "<h2 class='font-bold text-xl pt-4'>")
 	mdContent = strings.Replace(mdContent, "<h2 class='font-bold text-xl pt-4'>", "<h2 class='font-bold text-xl'>", 1)
 	mdContent = strings.ReplaceAll(mdContent, "<ol>", "<ol class='list-decimal list-inside pl-4 flex flex-col gap-2'>")
+	mdContent = strings.ReplaceAll(mdContent, "<img", "<img class='pt-4 w-fit md:max-h-sm md:max-w-sm'")
 
 	return mdContent
 }
