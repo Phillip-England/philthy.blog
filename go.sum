@@ -1,7 +1,7 @@
 github.com/Phillip-England/ffh v1.0.11 h1:sHwkuINUVbDNqKH0ecyHvf7JRew2saoOeQLXyJe+FYI=
 github.com/Phillip-England/ffh v1.0.11/go.mod h1:TYE1GbwuKnpxvG1MDvH4Vze5uFMgjXIJFVqbGN/R9Y8=
-github.com/Phillip-England/vbf v0.0.14 h1:CC1y5k3XuMuFBw/ScW15SeTJLV9/A303cpx4DcLFA18=
-github.com/Phillip-England/vbf v0.0.14/go.mod h1:HZ2szKq1CqW+OmvtNZS/0hWL5nv7AFfyQ8o4jWd+3ts=
+github.com/Phillip-England/vbf v0.0.15 h1:Vc8qsUqHIH3OHB0qxLIaTrtbTLpsLo69/4lsj6/OyT8=
+github.com/Phillip-England/vbf v0.0.15/go.mod h1:HZ2szKq1CqW+OmvtNZS/0hWL5nv7AFfyQ8o4jWd+3ts=
 github.com/a-h/templ v0.2.771 h1:4KH5ykNigYGGpCe0fRJ7/hzwz72k3qFqIiiLLJskbSo=
 github.com/a-h/templ v0.2.771/go.mod h1:lq48JXoUvuQrU0VThrK31yFwdRjTCnIE5bcPCM9IP1w=
 github.com/alecthomas/assert/v2 v2.7.0 h1:QtqSACNS3tF7oasA8CU6A6sXZSBDqnm7RfpLl9bZqbE=

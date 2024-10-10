@@ -9,5 +9,9 @@ all: build
 tw:
 	tailwindcss -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT) --watch
 
+# kills all activity on port 8080
+kill:
+    sudo lsof -t -i:8080 | xargs kill -9
+
 run:
 	tailwindcss -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT); go run main.go

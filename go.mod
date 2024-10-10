@@ -2,7 +2,7 @@ module philthy.blog
 
 go 1.23.2
 
-require github.com/Phillip-England/vbf v0.0.14
+require github.com/Phillip-England/vbf v0.0.15
 
 require (
 	github.com/Phillip-England/ffh v1.0.11 // indirect
