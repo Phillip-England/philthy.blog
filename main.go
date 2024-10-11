@@ -1,8 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"net/http"
+	"os"
+	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/Phillip-England/vbf"
@@ -18,11 +22,15 @@ func main() {
 	vbf.HandleStaticFiles(mux)
 	vbf.HandleFavicon(mux)
 
+	err := GeneratePostsPage()
+	if err != nil {
+		panic(err)
+	}
+
 	//==================================
 	// ROUTES
 	//==================================
 
-	// Define the route with middleware and template execution
 	vbf.AddRoute("GET /", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" {
 			mdContent, err := vbf.LoadMarkdown("./static/docs/home.md")
@@ -31,7 +39,7 @@ func main() {
 				return
 			}
 			mdContent = StyleMarkdownContent(mdContent)
-			vbf.WriteHTML(w, Layout("Philthy", "Philthy", "Saying the things I'm afraid to say", r.URL.Path, mdContent))
+			vbf.WriteHTML(w, Layout("Home", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, mdContent))
 		} else {
 			vbf.WriteString(w, "404 not found")
 		}
@@ -44,35 +52,24 @@ func main() {
 			return
 		}
 		mdContent = StyleMarkdownContent(mdContent)
-		vbf.WriteHTML(w, Layout("Philthy", "Philthy", "Saying the things I'm afraid to say", r.URL.Path, mdContent))
+		vbf.WriteHTML(w, Layout("Posts", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, mdContent))
 	}, vbf.MwLogger)
 
-	// vbf.AddRoute("GET /posts/{postNumber}", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
 	// 	postNumber := r.PathValue("postNumber")
-	// 	mdContent, err := vbf.LoadMarkdown(fmt.Sprintf("./static/docs/%s.md", postNumber))
-	// 	mdContent = StyleMarkdownContent(mdContent)
-	// 	if err != nil {
-	// 		vbf.WriteString(w, "failed to load markdown content")
-	// 		return
-	// 	}
-	// 	err = vbf.ExecuteTemplate(w, t, "layout.html", map[string]interface{}{
-	// 		"Title":       "Posts",
-	// 		"HeaderText":  "Philthy",
-	// 		"SubText":     "Saying the things I'm afraid to say",
-	// 		"Content":     template.HTML(mdContent),
-	// 		"CurrentPath": r.URL.Path,
-	// 	})
-	// 	if err != nil {
-	// 		vbf.WriteString(w, err.Error())
-	// 		return
-	// 	}
-	// }, vbf.MwLogger)
 
-	err := vbf.Serve(mux, "8080")
+	//==================================
+	// SERVING
+	//==================================
+
+	err = vbf.Serve(mux, "8080")
 	if err != nil {
 		panic(err)
 	}
 }
+
+//==================================
+// GENERATIVE
+//==================================
 
 // takes plain markdown HTML and adds tailwind classes for styling
 func StyleMarkdownContent(mdContent string) string {
@@ -86,6 +83,54 @@ func StyleMarkdownContent(mdContent string) string {
 	mdContent = strings.ReplaceAll(mdContent, "<blockquote", "<blockquote class='italic'")
 
 	return mdContent
+}
+
+func GeneratePostsPage() error {
+	outputMdFile, err := os.OpenFile("./static/docs/posts.md", os.O_WRONLY|os.O_CREATE, 0644)
+	if err != nil {
+		return err
+	}
+	defer outputMdFile.Close()
+
+	// collecting all valid .md files for our blog
+	var validMdFilePaths []string
+	filepath.Walk("./static/docs", func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		pathParts := strings.Split(path, "/")
+		lastPathParts := pathParts[len(pathParts)-1]
+		mdFileNameParts := strings.Split(lastPathParts, "-")
+		firstMdFileNamePart := mdFileNameParts[0]
+		if _, err := strconv.Atoi(firstMdFileNamePart); err != nil {
+			// if the first part of the .md file name cannot be converted to an int, skip
+		} else {
+			validMdFilePaths = append(validMdFilePaths, path)
+		}
+		return nil
+	})
+
+	// going through our valid .md files to create a new .md file for the links
+	for i := 0; i < len(validMdFilePaths); i++ {
+		currentMdFile := validMdFilePaths[i]
+		mdFile, err := os.Open(currentMdFile)
+		if err != nil {
+			return err
+		}
+		defer mdFile.Close()
+		scanner := bufio.NewScanner(mdFile)
+		for scanner.Scan() {
+			line := scanner.Text()
+			if strings.Count(line, `#`) == 1 {
+				lineParts := strings.Split(line, " ")
+				mdFileTitleSlice := lineParts[1:]
+				mdFileTitle := strings.Join(mdFileTitleSlice, " ")
+				outputMdFile.Write([]byte(mdFileTitle))
+			}
+		}
+	}
+
+	return nil
 }
 
 //==================================
@@ -134,11 +179,14 @@ func Overlay() string {
 func Header(headerText string, subText string) string {
 	return fmt.Sprintf(`
 		<header class="flex flex-row justify-between p-4 border-b select-none z-40 bg-white fixed w-full top-0 h-[95px]">
-		    <div class="flex flex-col gap-2">
+			<a href='/' class='flex m-2'>
+				<img src='/static/img/path1.svg' />
+			</a>
+		    <div class="flex flex-col gap-2 md:items-end">
 		        <h1 class="font-bold text-2xl">%s</h1>
 		        <p class="text-sm">%s</p>
 		    </div>
-		    <div class="flex items-center">
+		    <div class="flex items-center md:hidden">
 		        <div id="icon-bars" _="on click toggle .hidden on me then toggle .hidden on #icon-x then toggle .hidden on #overlay then toggle .hidden on #navmenu" class="md:hidden">
 		            <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
 		                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />

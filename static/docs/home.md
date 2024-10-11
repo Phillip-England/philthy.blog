@@ -1,5 +1,5 @@
 
-![why](/static/img/g55.svg)
+![why](/static/img/path1.svg)
 # You Sinner
 *10/10/2024 by Phillip England*
 
