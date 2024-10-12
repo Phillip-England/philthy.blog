@@ -1,57 +1,72 @@
 
-![why](/static/img/path1.svg)
-# You Sinner
+![why](/static/img/1.webp)
+# Like Filthy Rags
 *10/10/2024 by Phillip England*
 
+When I was a Christian, I desperately wanted to please God with my behaviour. An impossible task.
 
-What are you doing here? This website is evil, and so are you. In fact, the prophet Jeremiah reminds us:
+I wanted to please God because I believed he had died a tortorous death on the cross for my sins. My personal infractions against God were washed clean by the blood of God himself. Because of this, I worked very hard to be in a continual process of sanctification. Not because I believed this would save me, but because I believed a righteous life was evidence of my salvation.
 
-> "The heart is deceitful above all things,
-> and desperately sick;
-> who can understand it?"
+I truly wanted to please God and I longed to hear him say, "well done, my good and faithful servant".
 
-— Jeremiah 17:9
+One night (after a few beers of course), my step-mother corrected me: "Phillip, you cannot please God, all of your actions are like *filthy rags* before God."
 
-And so we reach the crux of my issue with Christianity: it takes normal, healthy people, and causes them to view themselves in such a negative light.
+And, according to the Bible, she was right:
 
-That's why I decided to call this website, "Philthy."
+> "All of us have become like one who is unclean,
+> and all our righteous acts are like filthy rags;
+> we all shrivel up like a leaf,
+> and like the wind our sins sweep us away."
 
-Because for the first time in my life, I know I am not filthy. I am not sick or broken like the bible claims. I am a good, caring person. Most people are.
+— Isaiah 64:6
 
-## Finding my Why
+Oh, how deeply this can impact your confidence and self-image.
 
-My name is Phillip England, and I am no longer a Christian. The process of my deconversion has been one of the most challenging things I've ever walked through. I went from being certain about everything, to feeling like I know nothing. My sense of self has been shattered, and I am still actively picking up the pieces of my life.
+## Christianity and Mental Health
 
-It is difficult for me to put these words in front of you. As I write, I still wonder, "Will I burn in hell for this?" But my why is bigger than my fear.
+In 2022, I was struggling with my mental health. I began to examine my life closely. Instead of engaging in my behavior, I became an observer of it.
 
-I am doing this for three reasons:
+I discovered something very challenging: Christianity had something to do with my mental health struggles.
 
-1. To be a friend to those who are actively deconverting.
-2. To help Christians understand how their faith can be harmful to themselves and those around them.
-3. To provide an insider's perspective to non-Christians so they can better understand the faith.
+At first, I avoided these thoughts (as most do). I pushed them aside and thought to myself, "I am the problem, not my faith."
 
-The deconversion process can feel very isolating. I want to create a place where people can know they are not alone in their struggle. I am very grateful for those who've helped me in my process, and I want to give back to the community in any way I can.
+Maybe I was just doing Christianity wrong?
 
-This is why I am writing. My motivation is to help. I understand people will think I am dragging others to hell with my words. They can continue to think so. I will continue to share despite the looming threats of hell.
+So, I prayed.
 
-## Who Am I?
+## Matt Maeson - Sanctified
 
-I am a 31-year-old male from Tulsa, Oklahoma. I work at a Chick-fil-A restaurant, and I've lived in the Bible Belt for my entire life. I live within walking distance of Oral Roberts University, a Christian college people travel from all around the world to attend. I am completely surrounded by the Christian faith on all sides and can provide an insider's look at how Christianity practically plays out in the lives of believers.
+I went through a grueling divorce in 2019. I drove my ex-wife and daughter back to her hometown in Tennessee. After dropping her off, I found a church and threw myself on the ground in front of a cross. I had done such a thing many times before. This is where I always found myself in times of crisis.
 
-Despite growing up in a Christian household, my faith did not take flight until around 2014. At the time, I was struggling with a life-threatening drug addiction. I stepped out of my drug addiction and into the arms of Christianity. I made being a "Good Christian" my number one aim in life and continued to live this way for the next decade.
+Matt Maeson captures such a moment in his song, "[Sanctified](https://youtu.be/qvX-4ZWzeAA?si=9nat4yHoIut2MaC0)"
 
-People who know me will attest to this: the Christian faith changed my life for the better. Just a few weeks ago, I was looking over some old photos of me from around 2015 with a coworker. The drastic change in my character and appearance has served as a testimony to those around me. Sometimes, the fear of hell and the desire to please God can result in a truly life-changing experience for people. Christianity is not all bad. It has great capacity to do good in the lives of those who believe. But this is not the whole story. There is more to faith than positive life change.
+> I came here to find a place in public
+> Thought I'd dignify the truth that no one gets
+> I am sanctified and fucking losing it
+> I came here to cry, a babbling lunatic
+> I got loosely based on places I had been
+> To be lost and found and lost and found again
+> I can't seem to find the truth in anything
+> So I'll realign 'til I feel born again
 
-## To Those Who Know Me
+— Matt Maeson - Sanctified
 
-I understand these words are hard to read. I know you fear for my soul. What else could I expect? If you truly care for someone, and you truly think them to be in harm's way, you should speak up and say something.
+In his song, he clearly captures the cycle I am discussing. The cycle of sanctification. The process of realizing you can never please God with your behavior, and the internal war that takes place if you truly love God.
 
-Remember, in the same way you think my perspective is harmful, I believe the same about Christianity. I am speaking up because I feel the Christian faith can bring great harm to those who believe.
+This war was the root of my mental health issues.
 
-In this way, we can relate. We are both doing what we feel is right. Our motivations are our common ground.
+## My Issue With Christianity
 
-Your prayers are welcomed. If I am wrong, I would like to know. If the Christian faith is true, I would like to be educated by God. I am not resistant to believing in Christianity. In fact, I *want* to believe in Christianity. I just simply don't.
+Christianity has the potential to take normal, healthy people and turn them into haters of the self.
 
-The path I am taking is not an easy decision. This is difficult for me. I've spent a year contemplating the direction I will take in my life. I've found time and time again the true source of my faith is fear. I am afraid to leave the faith. I am afraid to say something. I am afraid of being punished. And it takes great bravery to face these fears.
+I hated myself because I was incapable of pleasing God. I was incapable of overcoming sin in my life.
 
-I love you all.
+At one point, I kept a log of every time I opened the incognito tab on my phone.
+
+I would feel guilty for my sin, while at the same time knowing I would commit the exact same act in the near future.
+
+Christianity has the potential to make people feel like they are doing a good thing on the surface, while deceptively eroding their identity into one of deep self-loathing beneath the surface.
+
+In Christianity, humans are the problem. We are the problem. This is the teaching that has caused my life so much harm.
+
+This is the teaching that I am attempting to undo in the lives of those around me.

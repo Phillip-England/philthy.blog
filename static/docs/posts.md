@@ -1,1 +1,1 @@
-Why am I Writing?
+1. [Why am I Writing?](/post/1)

@@ -46,7 +46,7 @@ func main() {
 	}, vbf.MwLogger)
 
 	vbf.AddRoute("GET /posts", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
-		mdContent, err := vbf.LoadMarkdown("./static/docs/home.md")
+		mdContent, err := vbf.LoadMarkdown("./static/docs/posts.md")
 		if err != nil {
 			vbf.WriteString(w, "failed to load markdown content")
 			return
@@ -55,7 +55,20 @@ func main() {
 		vbf.WriteHTML(w, Layout("Posts", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, mdContent))
 	}, vbf.MwLogger)
 
-	// 	postNumber := r.PathValue("postNumber")
+	vbf.AddRoute("GET /post/{postNumber}", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
+		postNumber := r.PathValue("postNumber")
+		mdContent, err := vbf.LoadMarkdown(fmt.Sprintf("./static/docs/%s.md", postNumber))
+		if err != nil {
+			vbf.WriteString(w, "failed to load markdown content")
+			return
+		}
+		mdContent = StyleMarkdownContent(mdContent)
+		mdContentTitle, err := ExtractH1Text(mdContent)
+		if err != nil {
+			vbf.WriteString(w, "failed to locate title in markdown content")
+		}
+		vbf.WriteHTML(w, Layout(mdContentTitle, "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, mdContent))
+	}, vbf.MwLogger)
 
 	//==================================
 	// SERVING
@@ -68,7 +81,44 @@ func main() {
 }
 
 //==================================
-// GENERATIVE
+// TYPES
+//==================================
+
+type PhilthyMarkdownFile struct {
+	Path       string
+	FileName   string
+	PostNumber string
+}
+
+//==================================
+// HTML HELPERS
+//==================================
+
+func ExtractH1Text(mdContent string) (string, error) {
+	indexOfH1 := strings.Index(mdContent, "<h1") + 1
+	if indexOfH1 == -1 {
+		return "", fmt.Errorf("markdown content did not contain a valid title")
+	}
+	mdContentTitle := ""
+	collectText := false
+	for i := indexOfH1; i < len(mdContent); i++ {
+		char := string(mdContent[i])
+		if char == ">" {
+			collectText = true
+			continue
+		}
+		if char == "<" {
+			break
+		}
+		if collectText {
+			mdContentTitle = mdContentTitle + string(char)
+		}
+	}
+	return mdContentTitle, nil
+}
+
+//==================================
+// MARKDOWN HELPERS
 //==================================
 
 // takes plain markdown HTML and adds tailwind classes for styling
@@ -81,39 +131,56 @@ func StyleMarkdownContent(mdContent string) string {
 	mdContent = strings.ReplaceAll(mdContent, "<p><img", "<p class='flex mb-8 items-center'><img class='max-w-[200px]'")
 	mdContent = strings.ReplaceAll(mdContent, "<p>", "<p class='mb-4'>")
 	mdContent = strings.ReplaceAll(mdContent, "<blockquote", "<blockquote class='italic'")
+	mdContent = strings.ReplaceAll(mdContent, "<a", "<a class='underline text-blue-500'")
 
 	return mdContent
 }
 
+//==================================
+// GENERATIVE
+//==================================
+
 func GeneratePostsPage() error {
+	// Delete the output file to ensure a clean rewrite
+	err := os.Remove("./static/docs/posts.md")
+	if err != nil && !os.IsNotExist(err) {
+		return err
+	}
+
+	// Open the output file for writing (it will be recreated)
 	outputMdFile, err := os.OpenFile("./static/docs/posts.md", os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		return err
 	}
 	defer outputMdFile.Close()
 
-	// collecting all valid .md files for our blog
-	var validMdFilePaths []string
+	// Collecting all valid .md files for the blog
+	var philthyMarkdownFiles []PhilthyMarkdownFile
 	filepath.Walk("./static/docs", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 		pathParts := strings.Split(path, "/")
-		lastPathParts := pathParts[len(pathParts)-1]
-		mdFileNameParts := strings.Split(lastPathParts, "-")
+		mdFileName := pathParts[len(pathParts)-1]
+		mdFileNameParts := strings.Split(mdFileName, ".")
 		firstMdFileNamePart := mdFileNameParts[0]
 		if _, err := strconv.Atoi(firstMdFileNamePart); err != nil {
-			// if the first part of the .md file name cannot be converted to an int, skip
+			// Skip files that don't start with a number
 		} else {
-			validMdFilePaths = append(validMdFilePaths, path)
+			philthyMdFile := PhilthyMarkdownFile{
+				Path:       path,
+				FileName:   mdFileName,
+				PostNumber: firstMdFileNamePart,
+			}
+			philthyMarkdownFiles = append(philthyMarkdownFiles, philthyMdFile)
 		}
 		return nil
 	})
 
-	// going through our valid .md files to create a new .md file for the links
-	for i := 0; i < len(validMdFilePaths); i++ {
-		currentMdFile := validMdFilePaths[i]
-		mdFile, err := os.Open(currentMdFile)
+	// Create new content in the .md file for the links
+	for i := 0; i < len(philthyMarkdownFiles); i++ {
+		currentMdFile := philthyMarkdownFiles[i]
+		mdFile, err := os.Open(currentMdFile.Path)
 		if err != nil {
 			return err
 		}
@@ -125,7 +192,7 @@ func GeneratePostsPage() error {
 				lineParts := strings.Split(line, " ")
 				mdFileTitleSlice := lineParts[1:]
 				mdFileTitle := strings.Join(mdFileTitleSlice, " ")
-				outputMdFile.Write([]byte(mdFileTitle))
+				outputMdFile.Write([]byte(fmt.Sprintf(`%s. [%s](/post/%s)`, currentMdFile.PostNumber, mdFileTitle, currentMdFile.PostNumber)))
 			}
 		}
 	}
@@ -172,14 +239,14 @@ func Layout(title string, headerText string, subText string, currentPath string,
 
 func Overlay() string {
 	return `
-		<div id="overlay" _="on click toggle .hidden on me then toggle .hidden on #icon-bars then toggle .hidden on #icon-x then toggle .hidden on #navmenu" class="h-full w-full bg-black opacity-50 fixed top-0 hidden z-30"></div>
+		<div id="overlay" _="on click toggle .hidden on me then toggle .hidden on #icon-bars then toggle .hidden on #icon-x then toggle .hidden on #navmenu" class="h-full w-full bg-black opacity-50 fixed top-0 hidden z-30 md:hidden"></div>
 	`
 }
 
 func Header(headerText string, subText string) string {
 	return fmt.Sprintf(`
 		<header class="flex flex-row justify-between p-4 border-b select-none z-40 bg-white fixed w-full top-0 h-[95px]">
-			<a href='/' class='flex m-2'>
+			<a href='/' class='flex'>
 				<img src='/static/img/path1.svg' />
 			</a>
 		    <div class="flex flex-col gap-2 md:items-end">
