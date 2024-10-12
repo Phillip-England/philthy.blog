@@ -33,41 +33,36 @@ func main() {
 
 	vbf.AddRoute("GET /", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" {
-			mdContent, err := vbf.LoadMarkdown("./static/docs/home.md")
+			article, err := Article("./static/docs/home.md")
 			if err != nil {
-				vbf.WriteString(w, "failed to load markdown content")
-				return
+				vbf.WriteString(w, "failed to load .md content")
 			}
-			mdContent = StyleMarkdownContent(mdContent)
-			vbf.WriteHTML(w, Layout("Home", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, mdContent))
+			vbf.WriteHTML(w, Layout("Home", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, article))
 		} else {
 			vbf.WriteString(w, "404 not found")
 		}
 	}, vbf.MwLogger)
 
 	vbf.AddRoute("GET /posts", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
-		mdContent, err := vbf.LoadMarkdown("./static/docs/posts.md")
+		article, err := Article("./static/docs/posts.md")
 		if err != nil {
-			vbf.WriteString(w, "failed to load markdown content")
-			return
+			vbf.WriteString(w, "failed to load .md content")
 		}
-		mdContent = StyleMarkdownContent(mdContent)
-		vbf.WriteHTML(w, Layout("Posts", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, mdContent))
+		vbf.WriteHTML(w, Layout("Posts", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, article))
 	}, vbf.MwLogger)
 
 	vbf.AddRoute("GET /post/{postNumber}", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
 		postNumber := r.PathValue("postNumber")
-		mdContent, err := vbf.LoadMarkdown(fmt.Sprintf("./static/docs/%s.md", postNumber))
+		article, err := Article(fmt.Sprintf("./static/docs/%s.md", postNumber))
 		if err != nil {
 			vbf.WriteString(w, "failed to load markdown content")
 			return
 		}
-		mdContent = StyleMarkdownContent(mdContent)
-		mdContentTitle, err := ExtractH1Text(mdContent)
+		mdContentTitle, err := ExtractH1Text(article)
 		if err != nil {
 			vbf.WriteString(w, "failed to locate title in markdown content")
 		}
-		vbf.WriteHTML(w, Layout(mdContentTitle, "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, mdContent))
+		vbf.WriteHTML(w, Layout(mdContentTitle, "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, article))
 	}, vbf.MwLogger)
 
 	//==================================
@@ -154,6 +149,9 @@ func GeneratePostsPage() error {
 	}
 	defer outputMdFile.Close()
 
+	// writing the header of the output file
+	outputMdFile.Write([]byte("# All Posts\n"))
+
 	// Collecting all valid .md files for the blog
 	var philthyMarkdownFiles []PhilthyMarkdownFile
 	filepath.Walk("./static/docs", func(path string, info os.FileInfo, err error) error {
@@ -192,7 +190,7 @@ func GeneratePostsPage() error {
 				lineParts := strings.Split(line, " ")
 				mdFileTitleSlice := lineParts[1:]
 				mdFileTitle := strings.Join(mdFileTitleSlice, " ")
-				outputMdFile.Write([]byte(fmt.Sprintf(`%s. [%s](/post/%s)`, currentMdFile.PostNumber, mdFileTitle, currentMdFile.PostNumber)))
+				outputMdFile.Write([]byte(fmt.Sprintf(`%s. [%s](/post/%s)`, currentMdFile.PostNumber, mdFileTitle, currentMdFile.PostNumber) + "\n"))
 			}
 		}
 	}
@@ -204,7 +202,7 @@ func GeneratePostsPage() error {
 // COMPONENTS
 //==================================
 
-func Layout(title string, headerText string, subText string, currentPath string, mdContent string) string {
+func Layout(title string, headerText string, subText string, currentPath string, contentComponents ...string) string {
 	return fmt.Sprintf(`
 		<html lang="en">
 	    <head>
@@ -220,21 +218,28 @@ func Layout(title string, headerText string, subText string, currentPath string,
 	            <div class="h-[95px]"></div>
 					%s
      			<div class="h-[65px]"></div>
-					%s%s
-	            <main
-	                class="flex-grow p-4 flex flex-col md:pl-[300px] lg:pr-[300px] mt-4"
-	                style="min-height: calc(100vh - 190px)"
-	            >
-	                <div class="flex flex-col md:pl-12 md:p-8">
-	                    %s
-	                </div>
-	            </main>
-	            %s
+					%s%s%s%s
 	            <div class="h-[100px]"></div>
 	        </div>
 	    </body>
 	</html>
-	`, title, Header(headerText, subText), SocialMediaBenner(), NavMenu(currentPath), mdContent, Overlay())
+	`, title, Header(headerText, subText), SocialMediaBenner(), NavMenu(currentPath), strings.Join(contentComponents, ""), Overlay())
+}
+
+func Article(mdFilePath string) (string, error) {
+	mdContent, err := vbf.LoadMarkdown(mdFilePath)
+	if err != nil {
+		return "", err
+	}
+	mdContent = StyleMarkdownContent(mdContent)
+	article := fmt.Sprintf(`
+	<article class="flex-grow p-4 flex flex-col md:pl-[300px] lg:pr-[300px] mt-4" style="min-height: calc(100vh - 190px)">
+	    <div class="flex flex-col md:pl-12 md:p-8">
+	        %s
+	    </div>
+	</article>
+	`, mdContent)
+	return article, nil
 }
 
 func Overlay() string {

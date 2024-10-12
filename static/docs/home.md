@@ -5,7 +5,26 @@
 
 When I was a Christian, I desperately wanted to please God with my behaviour. An impossible task.
 
-I wanted to please God because I believed he had died a tortorous death on the cross for my sins. My personal infractions against God were washed clean by the blood of God himself. Because of this, I worked very hard to be in a continual process of sanctification. Not because I believed this would save me, but because I believed a righteous life was evidence of my salvation.
+I wanted to please God because I believed he had died a tortorous death on the cross for my sins. My personal infractions against God were washed clean by the blood of God himself.
+
+Because of this, I worked very hard to be in a continual process of sanctification. Not because I believed this would save me, but because I believed a righteous life was evidence of my salvation.
+
+I believe this because James wrote:
+
+> "But someone will say, 'You have faith and I have works.'
+> Show me your faith apart from your works,
+> and I will show you my faith by my works."
+
+— James 2:18 ESV
+
+In the next verse he states:
+
+> "You believe that God is one; you do well.
+> Even the demons believe—and shudder!"
+
+— James 2:19 ESV
+
+
 
 I truly wanted to please God and I longed to hear him say, "well done, my good and faithful servant".
 
@@ -40,14 +59,14 @@ I went through a grueling divorce in 2019. I drove my ex-wife and daughter back 
 
 Matt Maeson captures such a moment in his song, "[Sanctified](https://youtu.be/qvX-4ZWzeAA?si=9nat4yHoIut2MaC0)"
 
-> I came here to find a place in public
+> "I came here to find a place in public
 > Thought I'd dignify the truth that no one gets
 > I am sanctified and fucking losing it
 > I came here to cry, a babbling lunatic
 > I got loosely based on places I had been
 > To be lost and found and lost and found again
 > I can't seem to find the truth in anything
-> So I'll realign 'til I feel born again
+> So I'll realign 'til I feel born again"
 
 — Matt Maeson - Sanctified
 
