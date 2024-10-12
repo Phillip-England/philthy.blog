@@ -15,16 +15,16 @@ I believe this because James wrote:
 > Show me your faith apart from your works,
 > and I will show you my faith by my works."
 
-— James 2:18 ESV
+> — James 2:18 ESV
 
 In the next verse he states:
 
 > "You believe that God is one; you do well.
 > Even the demons believe—and shudder!"
 
-— James 2:19 ESV
+> — James 2:19 ESV
 
-
+## Well Done
 
 I truly wanted to please God and I longed to hear him say, "well done, my good and faithful servant".
 
@@ -37,7 +37,7 @@ And, according to the Bible, she was right:
 > we all shrivel up like a leaf,
 > and like the wind our sins sweep us away."
 
-— Isaiah 64:6
+> — Isaiah 64:6
 
 Oh, how deeply this can impact your confidence and self-image.
 
@@ -49,9 +49,9 @@ I discovered something very challenging: Christianity had something to do with m
 
 At first, I avoided these thoughts (as most do). I pushed them aside and thought to myself, "I am the problem, not my faith."
 
-Maybe I was just doing Christianity wrong?
+Christianity put me in the position of feeling like I was the issue. Like something was deeply wrong with myself.
 
-So, I prayed.
+"My faith cannot possibly have a negative impact on my life", I thought.
 
 ## Matt Maeson - Sanctified
 
@@ -68,7 +68,7 @@ Matt Maeson captures such a moment in his song, "[Sanctified](https://youtu.be/q
 > I can't seem to find the truth in anything
 > So I'll realign 'til I feel born again"
 
-— Matt Maeson - Sanctified
+> — Sanctified by Matt Maeson
 
 In his song, he clearly captures the cycle I am discussing. The cycle of sanctification. The process of realizing you can never please God with your behavior, and the internal war that takes place if you truly love God.
 
