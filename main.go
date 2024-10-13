@@ -34,8 +34,10 @@ func main() {
 	vbf.AddRoute("GET /", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" {
 			vbf.WriteHTML(w, Layout("Home", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, `
-				<section class="flex-grow flex flex-col md:pl-[300px]  relative top-[65px] h-full p-4" style="min-height: calc(100vh - 160px)">
-					<div class="flex bg-[url('/static/img/hero.svg')] bg-contain bg-no-repeat h-full w-full md:ml-12 md:m-8"></div>
+				<section class="flex-grow flex flex-col md:pl-[300px]  relative top-[65px] h-full" style="min-height: calc(100vh - 160px)">
+					<div class='p-4 md:p-8 md:pl-12 flex h-full w-full'>
+						<div class="flex bg-[url('/static/img/hero.svg')]  md:bg-[url('/static/img/hero-full.svg')] bg-contain bg-no-repeat h-full w-full"></div>
+					</div>
 				</section>
 			`))
 		} else {
@@ -83,6 +85,7 @@ type PhilthyMarkdownFile struct {
 	Path       string
 	FileName   string
 	PostNumber string
+	Title      string
 }
 
 //==================================
@@ -126,7 +129,7 @@ func StyleMarkdownContent(mdContent string) string {
 	mdContent = strings.ReplaceAll(mdContent, "<p><img", "<p class='flex mb-8 items-center'><img class='max-w-[200px]'")
 	mdContent = strings.ReplaceAll(mdContent, "<p>", "<p class='mb-4'>")
 	mdContent = strings.ReplaceAll(mdContent, "<blockquote", "<blockquote class='italic pl-4'")
-	mdContent = strings.ReplaceAll(mdContent, "<a", "<a class='underline text-blue-500'")
+	mdContent = strings.ReplaceAll(mdContent, "<a", "<a class='underline text-blue-500 visited:text-purple-500'")
 
 	return mdContent
 }
@@ -136,6 +139,7 @@ func StyleMarkdownContent(mdContent string) string {
 //==================================
 
 func GeneratePostsPage() error {
+
 	// Delete the output file to ensure a clean rewrite
 	err := os.Remove("./static/docs/posts.md")
 	if err != nil && !os.IsNotExist(err) {
@@ -175,7 +179,7 @@ func GeneratePostsPage() error {
 		return nil
 	})
 
-	// Create new content in the .md file for the links
+	// extracting the titles out of each markdown file
 	for i := 0; i < len(philthyMarkdownFiles); i++ {
 		currentMdFile := philthyMarkdownFiles[i]
 		mdFile, err := os.Open(currentMdFile.Path)
@@ -190,10 +194,17 @@ func GeneratePostsPage() error {
 				lineParts := strings.Split(line, " ")
 				mdFileTitleSlice := lineParts[1:]
 				mdFileTitle := strings.Join(mdFileTitleSlice, " ")
-				outputMdFile.Write([]byte(fmt.Sprintf(`%s. [%s](/post/%s)`, currentMdFile.PostNumber, mdFileTitle, currentMdFile.PostNumber) + "\n"))
+				currentMdFile.Title = mdFileTitle
+				outputMdFile.Write([]byte(fmt.Sprintf(`%s. [%s](/post/%s)`, currentMdFile.PostNumber, currentMdFile.Title, currentMdFile.PostNumber) + "\n"))
 			}
 		}
 	}
+
+	// writing out the "Recent Posts" section
+	// for i := 0; i < len(philthyMarkdownFiles); i++ {
+	// 	currentMdFile := philthyMarkdownFiles[i]
+	// 	fmt.Println(currentMdFile)
+	// }
 
 	return nil
 }
@@ -236,7 +247,7 @@ func MarkdownArticle(mdFilePath string) (string, error) {
 func Article(children ...string) string {
 	childrenHTML := strings.Join(children, "")
 	return fmt.Sprintf(`
-		<article class="flex-grow p-4 flex flex-col md:pl-[300px] lg:pr-[300px] relative top-[65px]" style="min-height: calc(100vh - 160px)">
+		<article class="flex-grow p-4 flex flex-col md:pl-[300px] lg:pr-[300px]  relative top-[65px]" style="min-height: calc(100vh - 160px)">
 		    <div class="flex flex-col md:pl-12 md:p-8">
 		        %s
 		    </div>
@@ -254,7 +265,7 @@ func Header(headerText string, subText string) string {
 	return fmt.Sprintf(`
 		<header class="flex flex-row justify-between p-4 border-b select-none z-40 bg-white fixed w-full top-0 h-[95px]">
 			<a href='/' class='flex'>
-				<img src='/static/img/path1.svg' />
+				<img src='/static/img/logo.svg' />
 			</a>
 		    <div class="flex flex-col gap-2 md:items-end">
 		        <h1 class="font-bold text-2xl">%s</h1>
