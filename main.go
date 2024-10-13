@@ -33,18 +33,18 @@ func main() {
 
 	vbf.AddRoute("GET /", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" {
-			article, err := Article("./static/docs/home.md")
-			if err != nil {
-				vbf.WriteString(w, "failed to load .md content")
-			}
-			vbf.WriteHTML(w, Layout("Home", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, article))
+			vbf.WriteHTML(w, Layout("Home", "Philthy.blog", "Saying the things I'm afraid to say", r.URL.Path, `
+				<section class="flex-grow flex flex-col md:pl-[300px]  relative top-[65px] h-full p-4" style="min-height: calc(100vh - 160px)">
+					<div class="flex bg-[url('/static/img/hero.svg')] bg-contain bg-no-repeat h-full w-full md:ml-12 md:m-8"></div>
+				</section>
+			`))
 		} else {
 			vbf.WriteString(w, "404 not found")
 		}
 	}, vbf.MwLogger)
 
 	vbf.AddRoute("GET /posts", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
-		article, err := Article("./static/docs/posts.md")
+		article, err := MarkdownArticle("./static/docs/posts.md")
 		if err != nil {
 			vbf.WriteString(w, "failed to load .md content")
 		}
@@ -53,7 +53,7 @@ func main() {
 
 	vbf.AddRoute("GET /post/{postNumber}", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
 		postNumber := r.PathValue("postNumber")
-		article, err := Article(fmt.Sprintf("./static/docs/%s.md", postNumber))
+		article, err := MarkdownArticle(fmt.Sprintf("./static/docs/%s.md", postNumber))
 		if err != nil {
 			vbf.WriteString(w, "failed to load markdown content")
 			return
@@ -216,9 +216,7 @@ func Layout(title string, headerText string, subText string, currentPath string,
 	    <body class="h-screen">
 	        <div id="root" class="min-h-screen">
 	            <div class="h-[95px]"></div>
-					%s
-     			<div class="h-[65px]"></div>
-					%s%s%s%s
+					%s%s%s%s%s
 	            <div class="h-[100px]"></div>
 	        </div>
 	    </body>
@@ -226,20 +224,24 @@ func Layout(title string, headerText string, subText string, currentPath string,
 	`, title, Header(headerText, subText), SocialMediaBenner(), NavMenu(currentPath), strings.Join(contentComponents, ""), Overlay())
 }
 
-func Article(mdFilePath string) (string, error) {
+func MarkdownArticle(mdFilePath string) (string, error) {
 	mdContent, err := vbf.LoadMarkdown(mdFilePath)
 	if err != nil {
 		return "", err
 	}
 	mdContent = StyleMarkdownContent(mdContent)
-	article := fmt.Sprintf(`
-	<article class="flex-grow p-4 flex flex-col md:pl-[300px] lg:pr-[300px] mt-4" style="min-height: calc(100vh - 190px)">
-	    <div class="flex flex-col md:pl-12 md:p-8">
-	        %s
-	    </div>
-	</article>
-	`, mdContent)
-	return article, nil
+	return Article(mdContent), nil
+}
+
+func Article(children ...string) string {
+	childrenHTML := strings.Join(children, "")
+	return fmt.Sprintf(`
+		<article class="flex-grow p-4 flex flex-col md:pl-[300px] lg:pr-[300px] relative top-[65px]" style="min-height: calc(100vh - 160px)">
+		    <div class="flex flex-col md:pl-12 md:p-8">
+		        %s
+		    </div>
+		</article>
+	`, childrenHTML)
 }
 
 func Overlay() string {
@@ -303,7 +305,7 @@ func NavItem(currentPath string, href string, text string) string {
 
 func SocialMediaBenner() string {
 	return `
-		<div class="bg-black text-white md:pl-[300px] flex flex-row fixed top-[95px] h-[65px] w-full">
+		<div class="bg-black text-white md:pl-[300px] flex flex-row fixed top-[95px] h-[65px] w-full z-40">
 			<a href='https://www.youtube.com/@phillip-england' target="_blank">
 				<div class='p-4'>
 					<svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -311,7 +313,6 @@ func SocialMediaBenner() string {
 					</svg>
 				</div>
 			</a>
-
 		</div>
 	`
 }
