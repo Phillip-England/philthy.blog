@@ -1,44 +1,26 @@
-let store = {}
-let events = []
+// function getCookie(name) {
+//   const value = `; ${document.cookie}`;
+//   const parts = value.split(`; ${name}=`);
+//   if (parts.length === 2) return parts.pop().split(";").shift();
+// }
 
-function signal(initialValue) {
-    let value = initialValue;
-    let subscribers = [];
+// function setCookie(name, value, days) {
+//   const date = new Date();
+//   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+//   const expires = `expires=${date.toUTCString()}`;
+//   document.cookie = `${name}=${value}; ${expires}; path=/`;
+// }
 
-    function get() {
-        return value;
-    }
-
-    function set(newValue) {
-        if (value !== newValue) {
-        value = newValue;
-        subscribers.forEach(callback => callback(value));
-        }
-    }
-
-    function subscribe(callback) {
-        subscribers.push(callback);
-        return () => {
-        subscribers = subscribers.filter(sub => sub !== callback);
-        };
-    }
-
-    return { get, set, subscribe };
-
-}
-
-function qs(selector, node=null) {
-    if (node) {
-        return node.querySelector(selector)
-    } else {
-        return document.querySelector(selector)
-    }
-}
-
-function qsa(selector, node=null) {
-    if (node) {
-        return node.querySelectorAll(selector)
-    } else {
-        return document.querySelectorAll(selector)
-    }
-}
+// document.addEventListener("DOMContentLoaded", function () {
+//   let theme = getCookie("theme");
+//   if (!theme) {
+//     const prefersDarkScheme = window.matchMedia(
+//       "(prefers-color-scheme: dark)",
+//     ).matches;
+//     theme = prefersDarkScheme ? "dark" : "light";
+//     setCookie("theme", theme, 365);
+//   }
+//   if (theme === "dark") {
+//     document.documentElement.classList.add("dark");
+//   }
+// });

@@ -602,10 +602,6 @@ video {
   height: 2rem;
 }
 
-.h-\[100px\] {
-  height: 100px;
-}
-
 .h-\[65px\] {
   height: 65px;
 }
@@ -644,6 +640,10 @@ video {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .select-none {
@@ -715,44 +715,12 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-\[url\(\'\/static\/img\/hero\.svg\'\)\] {
-  background-image: url('/static/img/hero.svg');
-}
-
-.bg-\[url\(\'\/static\/img\/hero2\.svg\'\)\] {
-  background-image: url('/static/img/hero2.svg');
-}
-
-.bg-\[url\(\'\/static\/img\/hero-full\.svg\'\)\] {
-  background-image: url('/static/img/hero-full.svg');
-}
-
-.bg-contain {
-  background-size: contain;
-}
-
-.bg-cover {
-  background-size: cover;
-}
-
-.bg-no-repeat {
-  background-repeat: no-repeat;
-}
-
 .p-2 {
   padding: 0.5rem;
 }
 
 .p-4 {
   padding: 1rem;
-}
-
-.p-12 {
-  padding: 3rem;
-}
-
-.p-8 {
-  padding: 2rem;
 }
 
 .pb-1 {
@@ -803,6 +771,11 @@ video {
   font-style: italic;
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
@@ -830,14 +803,6 @@ video {
 }
 
 @media (min-width: 768px) {
-  .md\:m-8 {
-    margin: 2rem;
-  }
-
-  .md\:ml-12 {
-    margin-left: 3rem;
-  }
-
   .md\:flex {
     display: flex;
   }
@@ -850,12 +815,16 @@ video {
     width: 300px;
   }
 
+  .md\:w-\[550px\] {
+    width: 550px;
+  }
+
   .md\:items-end {
     align-items: flex-end;
   }
 
-  .md\:bg-\[url\(\'\/static\/img\/hero-full\.svg\'\)\] {
-    background-image: url('/static/img/hero-full.svg');
+  .md\:p-12 {
+    padding: 3rem;
   }
 
   .md\:p-8 {
@@ -869,20 +838,33 @@ video {
   .md\:pl-\[300px\] {
     padding-left: 300px;
   }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
 }
 
 @media (min-width: 1024px) {
-  .lg\:pr-\[400px\] {
-    padding-right: 400px;
-  }
-
   .lg\:pr-\[300px\] {
     padding-right: 300px;
   }
 }
 
-@media (min-width: 1280px) {
-  .xl\:pr-\[500px\] {
-    padding-right: 500px;
-  }
+.dark\:flex:where(.dark, .dark *) {
+  display: flex;
+}
+
+.dark\:hidden:where(.dark, .dark *) {
+  display: none;
+}
+
+.dark\:bg-black:where(.dark, .dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.dark\:text-white:where(.dark, .dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
