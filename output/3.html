@@ -1,0 +1,145 @@
+<html lang="en"><head>
+	        <meta charset="UTF-8"/>
+	        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	        <link rel="stylesheet" href="https://philthy.blog/static/css/output.css"/>
+	        <script src="https://philthy.blog/static/js/index.js"></script>
+	        <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+			<script>(function () {  const getCookie = (name) => {    const value = '; ' + document.cookie;    const parts = value.split('; ' + name + '=');    if (parts.length === 2) return parts.pop().split(';').shift();  };  const theme = getCookie('theme');  if (theme === 'light') {    document.documentElement.classList.remove('dark');  } else if (theme === 'dark') {    document.documentElement.classList.add('dark');  } else if (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches) {    document.documentElement.classList.add('dark');  }})();</script>
+	        <title>Inheriting Beliefs | Philthy</title>
+	    </head>
+	    <body class="h-screen bg-white dark:bg-black">
+	        <div id="root" class="min-h-screen">
+	            <div class="h-[95px]"></div>
+				
+		<header class="flex flex-row justify-between p-4 dark:border-gray-800 border-b select-none z-40 bg-white fixed w-full top-0 h-[95px] dark:bg-black dark:text-white">
+			<a href="https://philthy.blog/index.html" class="flex dark:hidden">
+				<img src="https://philthy.blog/static/img/logo-black.svg" width="50"/>
+			</a>
+			<a href="https://philthy.blog/index.html" class="dark:flex hidden">
+				<img src="https://philthy.blog/static/img/logo-white.svg" width="50"/>
+			</a>
+		    <div class="flex flex-col gap-2 md:items-end">
+		        <h1 class="font-bold text-2xl">philthy.blog</h1>
+		        <p class="text-sm">Saying the things I&#39;m afraid to say</p>
+		    </div>
+		    <div class="flex items-center md:hidden">
+		        <div id="icon-bars" _="on click toggle .hidden on me then toggle .hidden on #icon-x then toggle .hidden on #overlay then toggle .hidden on #navmenu" class="md:hidden">
+		            <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+		                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"></path>
+		            </svg>
+		        </div>
+		        <div id="icon-x" class="hidden md:hidden" _="on click toggle .hidden on me then toggle .hidden on #icon-bars then toggle .hidden on #overlay then toggle .hidden on #navmenu">
+		            <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+		                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"></path>
+		            </svg>
+		        </div>
+		    </div>
+		</header>
+	
+		<div class="text-black bg-white dark:bg-black dark:text-white border-b dark:border-gray-800 md:pl-[300px] flex flex-row fixed top-[95px] h-[65px] w-full z-30 justify-between">
+			<div class="flex flex-row gap-4">
+				<a href="https://www.youtube.com/@phillip-england" target="_blank">
+					<div class="p-4">
+						<svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						  <path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+				</a>
+			</div>
+			<div>
+				<div class="p-4 flex flex-row gap-4">
+					<svg _="on click toggle .dark on &lt;html/&gt; then set cookies[&#34;theme&#34;] to {value: &#34;dark&#34;, path: &#34;/&#34;}" id="moon-icon" class="w-8 h-8 cursor-pointer flex dark:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						<path fill-rule="evenodd" d="M11.675 2.015a.998.998 0 0 0-.403.011C6.09 2.4 2 6.722 2 12c0 5.523 4.477 10 10 10 4.356 0 8.058-2.784 9.43-6.667a1 1 0 0 0-1.02-1.33c-.08.006-.105.005-.127.005h-.001l-.028-.002A5.227 5.227 0 0 0 20 14a8 8 0 0 1-8-8c0-.952.121-1.752.404-2.558a.996.996 0 0 0 .096-.428V3a1 1 0 0 0-.825-.985Z" clip-rule="evenodd"></path>
+					</svg>
+					<svg _="on click toggle .dark on &lt;html/&gt; then set cookies[&#34;theme&#34;] to {value: &#34;light&#34;, path: &#34;/&#34;}" id="sun-icon" class="w-8 h-8 hidden cursor-pointer dark:flex" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						<path fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clip-rule="evenodd"></path>
+					</svg>
+				</div>
+			</div>
+		</div>
+	
+		<nav id="navmenu" class="flex top-[95px] fixed bg-white w-2/3 h-full border-r dark:border-gray-800 z-40 hidden md:flex md:w-[300px] bg-white dark:bg-black text-black dark:text-white">
+		    <ul class="flex flex-col gap-2 p-2 w-full text-sm">
+				
+		  <li class="rounded border dark:border-gray-800 w-full flex bg-white dark:bg-black text-black dark:text-white">
+		      <a class="w-full p-4" href="https://philthy.blog/index.html">Home</a>
+		  </li>
+		
+		  <li class="rounded border dark:border-gray-800 w-full flex bg-white dark:bg-black text-black dark:text-white">
+		      <a class="w-full p-4" href="https://philthy.blog/posts.html">Posts</a>
+		  </li>
+		
+		    </ul>
+		</nav>
+
+	
+		<article class="flex-grow p-4 flex flex-col md:pl-[300px] lg:pr-[300px] relative top-[65px] bg-white dark:bg-black text-black dark:text-white" style="min-height: calc(100vh - 160px)">
+		    <div class="flex flex-col md:pl-12 md:p-8">
+		        <p class="flex mb-8 items-center"><img class="max-w-[200px]" src="https://philthy.blog/static/img/3.webp" alt="why"/></p>
+<h1 class="font-bold text-3xl pt-4 pb-1">Inheriting Beliefs</h1>
+<p class="text-xs italic pb-8"><em>10/13/2024 by Phillip England</em></p>
+<p class="mb-4">Early in my deconstruction process, I asked an important question: &#34;Why do I believe what I believe?&#34;</p>
+<p class="mb-4">I had asked the question before, but for the first time, I allowed myself to simmer in it.</p>
+<p class="mb-4">I was deeply afraid of this question. I knew in my heart I had been avoiding the anwser. Looking back, I did this with a lot of aspects of my faith.</p>
+<p class="mb-4">Christianity was like a house, and I had intentionally left the lights off in many rooms.</p>
+<h2 class="font-bold text-2xl pt-8 pb-8">The Predictability of Belief</h2>
+<p class="mb-4">After digging, I came to a stark realiation: my faith could&#39;ve been predicted. Was the same true for others?</p>
+<p class="mb-4">I was born in Pineville, Kentucky in 1993. I can almost hear the conversation in the room:</p>
+<blockquote class="italic pl-4">
+<p class="mb-4">&#34;What do you think this kid will believe?&#34;</p>
+</blockquote>
+<blockquote class="italic pl-4">
+<p class="mb-4">&#34;Well, his parents are Christians, and most people in this state are Christians, so..&#34;</p>
+</blockquote>
+<p class="mb-4">How much control did I have over my beliefs? Were my beliefs inherited?</p>
+<p class="mb-4">The questions continued to flood in.</p>
+<h2 class="font-bold text-2xl pt-8 pb-8">Changing One&#39;s Beliefs</h2>
+<p class="mb-4">One of the most important questions I asked during this process was: &#34;Am I capable of not believing in Christianity?&#34;</p>
+<p class="mb-4">The great commission is predicated on the idea that beliefs are malliable. In Christianity, our lives, example, and testamony are all tools which have the capacity to convince others of the truth of Christ.</p>
+<p class="mb-4">When I realized I was incapable of changing my beliefs, I began to wonder, &#34;Is it resonable to expect others to believe like me?&#34;</p>
+<p class="mb-4">How could one&#39;s salvation be dependant on a task I myself was incapable of engaging in? How could I expect the Muslim to change lest they go to hell?</p>
+<p class="mb-4">I couldn&#39;t.</p>
+<h2 class="font-bold text-2xl pt-8 pb-8">The Map of Faith</h2>
+<p class="mb-4">I began to view the God of the Bible as a character who favored people based on their place of birth. This <a class="underline text-blue-500 visited:text-purple-500" href="https://contrib.pbslearningmedia.org/WGBH/sj14/sj14-int-religmap/index.html">map of faith</a> will give you a good idea of what I mean.</p>
+<p class="mb-4">The map is evident, if you are born in India or China, you have a lower chance of going to Heaven than if you are born into the United States or South Africa.</p>
+<p class="mb-4">Now, I&#39;ve heard many Christians discuss their thoeries. Some will say, &#34;God would never cast someone into hell if they do not know the truth.&#34;</p>
+<p class="mb-4">But, doesn&#39;t the Bible teach people will perish for their lack of knowledge?</p>
+<blockquote class="italic pl-4">
+<p class="mb-4">&#34;My people are destroyed from lack of knowledge.<br/>
+Because you have rejected knowledge,<br/>
+I also reject you as my priests;<br/>
+because you have ignored the law of your God,<br/>
+I also will ignore your children.&#34;</p>
+</blockquote>
+<blockquote class="italic pl-4">
+<p class="mb-4">— Hosea 4:6 NIV</p>
+</blockquote>
+<h2 class="font-bold text-2xl pt-8 pb-8">The Purpose of The Great Commission</h2>
+<p class="mb-4">Some of Jesus&#39; last words were:</p>
+<blockquote class="italic pl-4">
+<p class="mb-4">&#34;Therefore go and make disciples of all nations,<br/>
+baptizing them in the name<br/>
+of the Father and of the Son and of the Holy Spirit.&#34;</p>
+</blockquote>
+<blockquote class="italic pl-4">
+<p class="mb-4">— Matthew 28:19 NIV</p>
+</blockquote>
+<p class="mb-4">From the Christian perspective, spreading the gospel seems to be of upmost importance, but why?</p>
+<p class="mb-4">Well, I think it is clear: Christianity promotes that without Jesus, you are lost in your sin and are on the wide path which leads to destruction.</p>
+<p class="mb-4">This is why people are so eager to take their faith into the jungles of the world, because they believe those without the gospel will suffer consequences after death.</p>
+<p class="mb-4">Some even believe their lack of effort in the great comission will result in blood on their hands in the next life.</p>
+<h2 class="font-bold text-2xl pt-8 pb-8">Best to Keep it to Yourself</h2>
+<p class="mb-4">The arguements I heard from Christians on this topic put me in the position of feeling like it was wrong to spread the Christian faith.</p>
+<p class="mb-4">If people cannot be held accountable for what the do not know, then wouldn&#39;t it be best to withhold the knowledge of Jesus from them?</p>
+<p class="mb-4">If we introduce people to the idea of Jesus, then they are not responsible for believe in him. But, if we do not tell them, they will not know any better and can plead authentic ignorance before God.</p>
+<p class="mb-4">If the Christians around me were right in their arguement, then I felt it better to keep the Gospel a secret.</p>
+
+		    </div>
+		</article>
+	
+		<div id="overlay" _="on click toggle .hidden on me then toggle .hidden on #icon-bars then toggle .hidden on #icon-x then toggle .hidden on #navmenu" class="h-full w-full bg-black opacity-50 fixed top-0 hidden z-30 md:hidden"></div>
+	
+	        </div>
+	    
+	
+	</body></html>

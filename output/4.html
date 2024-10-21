@@ -1,0 +1,150 @@
+<html lang="en"><head>
+	        <meta charset="UTF-8"/>
+	        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	        <link rel="stylesheet" href="https://philthy.blog/static/css/output.css"/>
+	        <script src="https://philthy.blog/static/js/index.js"></script>
+	        <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+			<script>(function () {  const getCookie = (name) => {    const value = '; ' + document.cookie;    const parts = value.split('; ' + name + '=');    if (parts.length === 2) return parts.pop().split(';').shift();  };  const theme = getCookie('theme');  if (theme === 'light') {    document.documentElement.classList.remove('dark');  } else if (theme === 'dark') {    document.documentElement.classList.add('dark');  } else if (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches) {    document.documentElement.classList.add('dark');  }})();</script>
+	        <title>Wishing it Weren&#39;t True | Philthy</title>
+	    </head>
+	    <body class="h-screen bg-white dark:bg-black">
+	        <div id="root" class="min-h-screen">
+	            <div class="h-[95px]"></div>
+				
+		<header class="flex flex-row justify-between p-4 dark:border-gray-800 border-b select-none z-40 bg-white fixed w-full top-0 h-[95px] dark:bg-black dark:text-white">
+			<a href="https://philthy.blog/index.html" class="flex dark:hidden">
+				<img src="https://philthy.blog/static/img/logo-black.svg" width="50"/>
+			</a>
+			<a href="https://philthy.blog/index.html" class="dark:flex hidden">
+				<img src="https://philthy.blog/static/img/logo-white.svg" width="50"/>
+			</a>
+		    <div class="flex flex-col gap-2 md:items-end">
+		        <h1 class="font-bold text-2xl">philthy.blog</h1>
+		        <p class="text-sm">Saying the things I&#39;m afraid to say</p>
+		    </div>
+		    <div class="flex items-center md:hidden">
+		        <div id="icon-bars" _="on click toggle .hidden on me then toggle .hidden on #icon-x then toggle .hidden on #overlay then toggle .hidden on #navmenu" class="md:hidden">
+		            <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+		                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"></path>
+		            </svg>
+		        </div>
+		        <div id="icon-x" class="hidden md:hidden" _="on click toggle .hidden on me then toggle .hidden on #icon-bars then toggle .hidden on #overlay then toggle .hidden on #navmenu">
+		            <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+		                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"></path>
+		            </svg>
+		        </div>
+		    </div>
+		</header>
+	
+		<div class="text-black bg-white dark:bg-black dark:text-white border-b dark:border-gray-800 md:pl-[300px] flex flex-row fixed top-[95px] h-[65px] w-full z-30 justify-between">
+			<div class="flex flex-row gap-4">
+				<a href="https://www.youtube.com/@phillip-england" target="_blank">
+					<div class="p-4">
+						<svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						  <path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+				</a>
+			</div>
+			<div>
+				<div class="p-4 flex flex-row gap-4">
+					<svg _="on click toggle .dark on &lt;html/&gt; then set cookies[&#34;theme&#34;] to {value: &#34;dark&#34;, path: &#34;/&#34;}" id="moon-icon" class="w-8 h-8 cursor-pointer flex dark:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						<path fill-rule="evenodd" d="M11.675 2.015a.998.998 0 0 0-.403.011C6.09 2.4 2 6.722 2 12c0 5.523 4.477 10 10 10 4.356 0 8.058-2.784 9.43-6.667a1 1 0 0 0-1.02-1.33c-.08.006-.105.005-.127.005h-.001l-.028-.002A5.227 5.227 0 0 0 20 14a8 8 0 0 1-8-8c0-.952.121-1.752.404-2.558a.996.996 0 0 0 .096-.428V3a1 1 0 0 0-.825-.985Z" clip-rule="evenodd"></path>
+					</svg>
+					<svg _="on click toggle .dark on &lt;html/&gt; then set cookies[&#34;theme&#34;] to {value: &#34;light&#34;, path: &#34;/&#34;}" id="sun-icon" class="w-8 h-8 hidden cursor-pointer dark:flex" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						<path fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clip-rule="evenodd"></path>
+					</svg>
+				</div>
+			</div>
+		</div>
+	
+		<nav id="navmenu" class="flex top-[95px] fixed bg-white w-2/3 h-full border-r dark:border-gray-800 z-40 hidden md:flex md:w-[300px] bg-white dark:bg-black text-black dark:text-white">
+		    <ul class="flex flex-col gap-2 p-2 w-full text-sm">
+				
+		  <li class="rounded border dark:border-gray-800 w-full flex bg-white dark:bg-black text-black dark:text-white">
+		      <a class="w-full p-4" href="https://philthy.blog/index.html">Home</a>
+		  </li>
+		
+		  <li class="rounded border dark:border-gray-800 w-full flex bg-white dark:bg-black text-black dark:text-white">
+		      <a class="w-full p-4" href="https://philthy.blog/posts.html">Posts</a>
+		  </li>
+		
+		    </ul>
+		</nav>
+
+	
+		<article class="flex-grow p-4 flex flex-col md:pl-[300px] lg:pr-[300px] relative top-[65px] bg-white dark:bg-black text-black dark:text-white" style="min-height: calc(100vh - 160px)">
+		    <div class="flex flex-col md:pl-12 md:p-8">
+		        <p class="flex mb-8 items-center"><img class="max-w-[200px]" src="https://philthy.blog/static/img/4.webp" alt="why"/></p>
+<h1 class="font-bold text-3xl pt-4 pb-1">Wishing it Weren&#39;t True</h1>
+<p class="text-xs italic pb-8"><em>10/14/2024 by Phillip England</em></p>
+<p class="mb-4">I was pondering my beliefs, and realized I did not want the majority of the human race to be punished for eternity. This is not what I wanted, but it is what I <em>believed</em>.</p>
+<p class="mb-4">In the book of Matthew, Jesus makes things very clear: most people are on the wide path leading to destruction.</p>
+<blockquote class="italic pl-4">
+<p class="mb-4">&#34;Enter through the narrow gate.<br/>
+For wide is the gate and broad is the road<br/>
+that leads to destruction, and many enter through it.<br/>
+But small is the gate and narrow the road<br/>
+that leads to life, and only a few find it.&#34;</p>
+</blockquote>
+<blockquote class="italic pl-4">
+<p class="mb-4">— Mathew 7:13-14 NIV</p>
+</blockquote>
+<p class="mb-4">I brought this to the attention of many Christians in my life. Most of them seemed to have similar options: God could do whatever he wanted, despite the outcome. I felt like I was the only one wrestling with these thoughts. It was very isolating.</p>
+<h2 class="font-bold text-2xl pt-8 pb-8">The Spiritual Lottery</h2>
+<p class="mb-4">I began to have this deep-seeded feeling that I had won the &#34;spritual lottery.&#34; I carried this term with me throughout my deconstruction.</p>
+<p class="mb-4">I had this belief that if people would just see the world like me, they would be granted eternal life after death. Ironically enough, if you pressed me about my Christian faith, I believed I too was destined for eternal damnation.</p>
+<p class="mb-4">&#34;Why me?&#34; I would think to myself. Others in my life would say things like, &#34;I&#39;m just grateful I was born into the truth.&#34;</p>
+<p class="mb-4">But everyone thought the same about their own beliefs.</p>
+<p class="mb-4">Everyone thought themselves to be right about their faith, but not all of us <em>could</em> be right. Some of us were wrong. Maybe all of us.</p>
+<p class="mb-4">This lens gradually changed the way I viewed Christianity over the next year or so.</p>
+<h2 class="font-bold text-2xl pt-8 pb-8">A Terrible Outcome</h2>
+<p class="mb-4">What was the ultimate outcome of my faith? I had been taught Christianity would bring the most glory to God. And somehow, the majority of the human race being on the &#34;wide path which leads to destruction&#34; was the most god-glorifying outcome.</p>
+<p class="mb-4">I was raised to believe people deserved eternal torment. That, without the blood of Jesus, they are deserving of hell. It is the sacrafice of Jesus which makes us right before God, and without that, we are unclean in our sin before God.</p>
+<p class="mb-4">I call this a terrible outcome. but the Christian in me wants to speak up and claim the outcome to be just and fair.</p>
+<p class="mb-4">It is fair that people be punished for their wrongdoings. Our legal system is an infantile attempt to model the perfect justice system set by God. We are made in his image and like children do, we are modelling our parents behaviour.</p>
+<p class="mb-4">That is what the Christian in me wants to say.</p>
+<h2 class="font-bold text-2xl pt-8 pb-8">Ignoring The Great Commision</h2>
+<p class="mb-4">If we bring the Gospel to all the world, then all the world may be held accountable. But if we fail to bring the Gospel to them, will God have mercy on them for their ignorance? I wrestled with this thought and it put me in the position of feeling like it was wrong to tell people about Jesus. If I told them, they may be punished.</p>
+<p class="mb-4">However, in doing so you may put yourself at risk of eternal damnation for not carrying out the will of God.</p>
+<p class="mb-4">Who goes to Heaven? Jesus said,</p>
+<blockquote class="italic pl-4">
+<p class="mb-4">&#34;Not everyone who says to me, ‘Lord, Lord,’.<br/>
+will enter the kingdom of heaven,<br/>
+but only the one who does the will of my Father who is in heaven.&#34;</p>
+</blockquote>
+<blockquote class="italic pl-4">
+<p class="mb-4">— Mathew 7:21 NIV</p>
+</blockquote>
+<h2 class="font-bold text-2xl pt-8 pb-8">Disliking my Own Beliefs</h2>
+<p class="mb-4">I really came to a point where I did not like my beliefs and their ultimate outcome. I did not want to be in a room where we all believe Muslims will go to hell because they do not think the right thoughts about Jesus.</p>
+<p class="mb-4">I felt myself arrogant because I realized I had an expectation of others that I myself could not live up to. I thought it reasonable for others to be expected to change their beliefs, but had I been asked to change mine, I would&#39;ve said, &#34;no.&#34;</p>
+<p class="mb-4">I found myself incapable of changing my own beliefs yet expecting others to change theirs. I realized I wanted other people to be like me. I wanted them to think like me and to behave like me, or at least the ideal version of myself I was chasing.</p>
+<p class="mb-4">This stark reality set with me for months. It was actually true that Christianity had put me in the position of expecting the whole world to see the truth of Jesus just like I had done.</p>
+<p class="mb-4">I was right, and anyone with a different opinion was plainly wrong.</p>
+<h2 class="font-bold text-2xl pt-8 pb-8">Accepting &#34;I Don&#39;t Know&#34;</h2>
+<p class="mb-4">&#34;I don&#39;t know&#34; has became an imporant phrase for me. It is a reminder of a time when I thought I did know. A time where I expected others to know what I know.</p>
+<p class="mb-4">&#34;I don&#39;t know&#34; is the most honest anwser I can give to exestential questions.</p>
+<blockquote class="italic pl-4">
+<p class="mb-4">Q: &#34;Where did the Universe come from?&#34;<br/>
+A: &#34;I don&#39;t know&#34;</p>
+</blockquote>
+<blockquote class="italic pl-4">
+<p class="mb-4">Q: &#34;What happens when we die?&#34;<br/>
+A: &#34;I don&#39;t know&#34;</p>
+</blockquote>
+<blockquote class="italic pl-4">
+<p class="mb-4">Q: &#34;Are demons roaming the earth?&#34;<br/>
+A: &#34;I don&#39;t know&#34;</p>
+</blockquote>
+<p class="mb-4">How could I possibly know the answers to these questions? Who could possibly know?</p>
+
+		    </div>
+		</article>
+	
+		<div id="overlay" _="on click toggle .hidden on me then toggle .hidden on #icon-bars then toggle .hidden on #icon-x then toggle .hidden on #navmenu" class="h-full w-full bg-black opacity-50 fixed top-0 hidden z-30 md:hidden"></div>
+	
+	        </div>
+	    
+	
+	</body></html>
