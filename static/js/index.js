@@ -318,6 +318,8 @@ class TwMarkdown extends HTMLElement {
 	  })
 	}
   }
+
+ 
   
   
   window.addEventListener("DOMContentLoaded", () => {
@@ -327,5 +329,4 @@ class TwMarkdown extends HTMLElement {
 	customElements.define("title-links", TitleLinks);
 	customElements.define('hash-title-scroll', HashTitleScroll)
 	customElements.define('custom-scroll', CustomScroll)
-  
   });

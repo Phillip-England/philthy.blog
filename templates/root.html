@@ -7,30 +7,46 @@
     <link rel="stylesheet" href="/static/css/output.css">
     <custom-scroll></custom-scroll> 
     <script>
-        // document.documentElement.classList.toggle('dark', localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches))
-        // window.addEventListener("DOMContentLoaded", () => {
-        //     let sun = document.getElementById("sun");
-        //     let moon = document.getElementById("moon");
-        //     sun.addEventListener("click", () => {
-        //         localStorage.theme = "light";
-        //         document.documentElement.classList.toggle("dark");
-        //     });
-        //     moon.addEventListener("click", () => {
-        //         localStorage.theme = "dark";
-        //         document.documentElement.classList.toggle("dark");
-        //     });
-        // });
+        document.documentElement.classList.toggle('dark', localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches))
+        window.addEventListener("DOMContentLoaded", () => {
+            let sun = document.getElementById("sun");
+            let moon = document.getElementById("moon");
+            sun.addEventListener("click", () => {
+                localStorage.theme = "light";
+                document.documentElement.classList.toggle("dark");
+            });
+            moon.addEventListener("click", () => {
+                localStorage.theme = "dark";
+                document.documentElement.classList.toggle("dark");
+            });
+        });
     </script>
     <hash-title-scroll offset='-140'></hash-title-scroll>
     <title>{{ .Title }}</title>
 </head>
-<body class="h-screen flex flex-col dark:bg-black bg-white custom-scroll">
-    <main class="flex-grow">
+<body class="h-screen flex flex-col dark:bg-black bg-white custom-scroll text-black dark:text-white">
+    <main class="flex-grow relative">
             {{ template "header" . }}
             {{ template "social" . }}
-			<tw-markdown>
-                {{ .Content }}
-            </tw-markdown>
+            {{ template "navbar" . }}
+            {{ template "overlay" . }}
+            <article class="relative top-[155px] md:pl-[300px] lg:pr-[300px]">
+                <div class="p-4">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-2">
+                            <h1 class="font-bold text-3xl">{{ .ArticleName }}</h1>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">{{ .SubText }}</p>
+                        </div>
+                        <img class="rounded" src="{{ .ImageSrc }}" height='150' width="150"/>
+                        <random-beads count="12"></random-beads>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <tw-markdown>
+                        {{ .Content }}
+                    </tw-markdown>
+                </div>
+            </article>
     </main>
     <script src="/static/js/index.js"></script>
 </body>
