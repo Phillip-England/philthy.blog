@@ -80,12 +80,12 @@ class TwMarkdown extends HTMLElement {
 		  break;
 		case "blockquote":
 		  element.classList.add(
-			"ml-4",
-			"pl-4",
-			"border-l-4",
-			"border-gray-300",
+			"pl-1",
+			"border-l-1",
+			// "border-gray-300",
 			"italic",
-			"text-gray-700",
+			"text-gray-800",
+            "dark:text-gray-400"
 		  );
 		  break;
 		case "code":
