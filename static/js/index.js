@@ -94,7 +94,7 @@ class TwMarkdown extends HTMLElement {
 		case "blockquote":
 		  element.classList.add(
 			// "pl-1",
-			"border-l-1",
+			// "border-l-1",
             "bg-gray-200",
             "dark:bg-gray-800",
             "w-fit",

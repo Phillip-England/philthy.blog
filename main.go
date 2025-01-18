@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"io/fs"
 	"net/http"
+	"path/filepath"
+	"strings"
 
 	"github.com/phillip-england/vbf"
 )
@@ -31,6 +34,11 @@ func main() {
 	vbf.HandleStaticFiles(mux)
 	vbf.HandleFavicon(mux)
 
+	mdFiles, err := NewMarkdownFilesFromDir("./posts")
+	if err != nil {
+		panic(err)
+	}
+
 	vbf.AddRoute("GET /", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
 		templates, _ := vbf.GetContext(KeyTemplates, r).(*template.Template)
 		mdContent, err := vbf.LoadMarkdown("./posts/index.md", "dracula")
@@ -38,6 +46,12 @@ func main() {
 			fmt.Println(err.Error())
 			w.WriteHeader(500)
 			return
+		}
+		var recentPosts []*MarkdownFile
+		if len(mdFiles) <= 5 {
+			recentPosts = mdFiles
+		} else {
+			recentPosts = mdFiles[len(mdFiles)-5:]
 		}
 		if r.URL.Path == "/" {
 			vbf.ExecuteTemplate(w, templates, "root.html", map[string]interface{}{
@@ -47,6 +61,7 @@ func main() {
 				"ArticleName": "philthy.blog",
 				"SubText":     "Saying the things I'm afraid to say",
 				"ImageSrc":    "./static/img/profile-sm.png",
+				"RecentPosts": recentPosts,
 			})
 		} else {
 			vbf.WriteString(w, "404 not found")
@@ -68,4 +83,70 @@ func main() {
 		panic(err)
 	}
 
+}
+
+
+type MarkdownFile struct {
+	Path string
+	ImagePath string
+	Title string
+	PostNumber string
+	Content string
+	Href string
+}
+
+func NewMarkdownFilesFromDir(dir string) ([]*MarkdownFile, error) {
+	var files []*MarkdownFile
+	var potErr error
+	potErr = nil
+	filepath.Walk(dir, func(path string, info fs.FileInfo, err error) error {
+		if info.IsDir() {
+			return nil
+		}
+		if path == "posts/index.md" {
+			return nil
+		}
+		file, err := NewMarkdownFileFromPath(path)
+		if err != nil {
+			potErr = err
+			return nil
+		}
+		files = append(files, file)
+		return nil
+	})
+	if potErr != nil {
+		return files, potErr
+	}
+	return files, nil
+}
+
+func NewMarkdownFileFromPath(path string) (*MarkdownFile, error) {
+	var file *MarkdownFile
+	mdContent, err := vbf.LoadMarkdown("/"+path, "dracula")
+	if err != nil {
+		return file, err
+	}
+	fileName := strings.Split(path, "/")[1]
+	fileNumber := strings.Split(fileName, "_")[0]
+	fileTitle := strings.Split(strings.Split(fileName, "_")[1], ".")[0]
+	imagePath := strings.Replace(path, "posts", "static/post_img", 1)
+	imagePath = strings.Replace(imagePath, ".md", ".jpg", 1)
+	file = &MarkdownFile{
+		Path: path,
+		PostNumber: fileNumber,
+		Title: fileTitle,
+		Content: mdContent,
+		ImagePath: "./"+imagePath,
+		Href: "/post/"+fileNumber,
+	}
+	return file, nil
+}
+
+func GetMarkdownFileByPostNumber(mdFiles []*MarkdownFile, number string) (*MarkdownFile, error) {
+	for _, file := range mdFiles {
+		if file.PostNumber == number {
+			return file, nil
+		}
+	}
+	return nil, fmt.Errorf(`post number %s does not exist`, number)
 }

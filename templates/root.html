@@ -30,26 +30,8 @@
             {{ template "social" . }}
             {{ template "navbar" . }}
             {{ template "overlay" . }}
-            <article id="article" class="relative top-[155px] md:pl-[300px] lg:pr-[300px] xl:pr-[500px]">
-                <div class="p-4">
-                    <div class="flex flex-col gap-4">
-                        <div class="flex flex-col gap-2">
-                            <h1 class="font-bold text-3xl">{{ .ArticleName }}</h1>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">{{ .SubText }}</p>
-                        </div>
-                        <div class="h-[150px] w-[150px]">
-                            <img class="rounded" src="{{ .ImageSrc }}" height='150' width="150"/>
-                        </div>
-                        <random-beads count="12"></random-beads>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <tw-markdown>
-                        {{ .Content }}
-                    </tw-markdown>
-                </div>
-            </article>
-            <title-links target='#article' offset="-140" link-wrapper-class="flex" link-class="p-4 w-full hover:underline border-l border-gray-200 dark:border-gray-800" class="fixed scrollbar-hidden overflow-y-scroll top-[155px] z-50 right-0 hidden lg:flex text-sm flex-col text-gray-600 dark:text-gray-400 h-full dark:bg-black bg-white hidden w-[300px] xl:w-[500px]"></title-links>
+			{{ template "article" . }}
+            <title-links target='#article' offset="-140" link-wrapper-class="flex" link-class="p-4 w-full hover:underline border-l border-gray-200 dark:border-gray-800" class="fixed scrollbar-hidden overflow-y-scroll top-[155px] z-50 right-0 hidden lg:flex text-sm flex-col text-gray-600 dark:text-gray-400 h-full dark:bg-black bg-white hidden w-[20%]"></title-links>
     </main>
     <script src="/static/js/index.js"></script>
 </body>
