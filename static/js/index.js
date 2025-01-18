@@ -52,11 +52,24 @@ class TwMarkdown extends HTMLElement {
 		  );
 		  break;
 		case "p":
-		  element.classList.add(
-			"text-sm",
-			"leading-6",
-			"mb-4",
-		  );
+          let parent = element.parentElement;
+          let nodeName = null
+          if (parent != null) {
+            nodeName = parent.nodeName.toLowerCase()            
+          }
+          if (nodeName == null) {
+              element.classList.add(
+                "text-sm",
+                "leading-6",
+                "mb-4",
+              );
+          } 
+          if (nodeName == "blockquote") {
+            element.classList.add(
+                "text-sm",
+                "leading-6",
+              );
+          }
 		  break;
 		case "ul":
 		  element.classList.add(
@@ -80,12 +93,18 @@ class TwMarkdown extends HTMLElement {
 		  break;
 		case "blockquote":
 		  element.classList.add(
-			"pl-1",
+			// "pl-1",
 			"border-l-1",
+            "bg-gray-200",
+            "dark:bg-gray-800",
+            "w-fit",
+            "p-4",
+            "rounded",
 			// "border-gray-300",
 			"italic",
 			"text-gray-800",
-            "dark:text-gray-400"
+            "dark:text-gray-200",
+            "mb-4",
 		  );
 		  break;
 		case "code":

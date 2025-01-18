@@ -32,3 +32,20 @@ It didn't happen all at once, but over the course of the next 8 or so years, I s
 But not everything that glitters is gold. Something can benefit your life in one way, while harming your life in another way.
 
 ## What Happened?
+It did not happen all at once. It was gradual. A small thought here. A discrepancy there. I tried to ignore it. I did not want to lose my faith, it was uncomfortable, like a toothache. The pressure mounted and cracks started forming on the surface of my faith. I used all the duct tape I could find to hold things together.
+
+I found myself frustrated at the idea of Muslims going to hell. I felt like they did not really have a solid choice in what they believe. "They are a product of their culture and environment", I thought. Was I a product of my culture and environment?
+
+I found myself unable to reconcile some of the actions of the Biblical God in the Old Testament. "Why would God command the Israelites to take the virgins of Jericho as spoils of war?" It felt like something men would write (and want), not a loving God.
+
+I recognized within myself the capacity to ignore, justify, and explain away just about anything. "I believe in a book I haven't even fully read", I thought. Do my beliefs even line up with the words of the Bible? If I am capable of defending a book I haven't even read, how much more diluted am I in other areas?
+
+I started having discussions with anyone willing to talk to me. It was a painful process. It became clear that most people have not thought about their faith past the surface level. They were just like me, simply believing what their parents, culture, and environment taught them to think and say. Alarm bells went off.
+
+Despite the outward appearance of Christianity being open and inviting to questions, this is not what I found in reality. I found a faith avoidant of the light of questioning. I discovered that a lack of questioning was the only thing keeping the doubts at bay.
+
+I discovered that Christianity is what Christians say it is. You can read your Bible, and if you guarded yourself from outside influence, the interpretation you walk away with will be starkly different than the interpretation of another who's done the same. And both readers may find themselves feeling like their perspective is a gift from the divine.
+
+Because questioning felt so scary, I started to believe it was the right thing to do. The scariest things in life have the most potential to grow my character. I remember hearing Matt Delahunty say, "Is fear a good reason to believe in something?" 
+
+Once I recognized that fear was not a good reason to believe something, I knocked everything off the table and started from ground zero. And I've been scared ever since.
