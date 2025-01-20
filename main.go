@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/phillip-england/vbf"
 )
 
@@ -54,12 +55,6 @@ func main() {
 			w.WriteHeader(500)
 			return
 		}
-		var recentPosts []*MarkdownFile
-		if len(mdFiles) <= 5 {
-			recentPosts = mdFiles
-		} else {
-			recentPosts = mdFiles[len(mdFiles)-5:]
-		}
 		if r.URL.Path == "/" {
 			vbf.ExecuteTemplate(w, templates, "root.html", map[string]interface{}{
 				"Title":       "Welcome - Philthy Blog",
@@ -68,7 +63,7 @@ func main() {
 				"ArticleName": "philthy.blog",
 				"SubText":     "Saying the things I'm afraid to say",
 				"ImageSrc":    "./static/img/profile-sm.png",
-				"RecentPosts": recentPosts,
+				"DateWritten": "1/20/2025",
 			})
 		} else {
 			vbf.WriteString(w, "404 not found")
@@ -83,26 +78,34 @@ func main() {
 			w.WriteHeader(500)
 			return
 		}
-		var recentPosts []*MarkdownFile
-		if len(mdFiles) <= 5 {
-			recentPosts = mdFiles
-		} else {
-			recentPosts = mdFiles[len(mdFiles)-5:]
-		}
 		vbf.ExecuteTemplate(w, templates, "root.html", map[string]interface{}{
-			"Title":       "Welcome - Philthy Blog",
+			"Title":       "Posts - Philthy Blog",
 			"Content":     template.HTML(mdContent),
 			"ReqPath":     r.URL.Path,
 			"ArticleName": "philthy.blog",
-			"SubText":     "Saying the things I'm afraid to say",
-			"ImageSrc":    "./static/img/profile-sm.png",
-			"RecentPosts": recentPosts,
+			"SubText":     "Things I've written",
+			"ImageSrc":    "./static/img/posts-sm.jpg",
+			"DateWritten": "1/20/2025",
 		})
 	}, vbf.MwLogger)
 
 	vbf.AddRoute("GET /post/{postNumber}", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
 		postNumber := r.PathValue("postNumber")
-		vbf.WriteHTML(w, `/post/`+postNumber)
+		mdFile, err := GetMarkdownFileByPostNumber(mdFiles, postNumber)
+		if err != nil {
+			vbf.WriteString(w, "404 not found")
+			return
+		}
+		vbf.ExecuteTemplate(w, templates, "root.html", map[string]interface{}{
+			"Title":       mdFile.Title + " - Philthy Blog",
+			"Content":     template.HTML(mdFile.Content),
+			"ReqPath":     r.URL.Path,
+			"ArticleName": mdFile.Title,
+			"SubText":     mdFile.SubText,
+			"ImageSrc":    mdFile.ImagePath,
+			"DateWritten": mdFile.DateWritten,
+			// "RecentPosts": recentPosts,
+		})
 
 	}, vbf.MwLogger)
 
@@ -114,12 +117,14 @@ func main() {
 }
 
 type MarkdownFile struct {
-	Path       string
-	ImagePath  string
-	Title      string
-	PostNumber string
-	Content    string
-	Href       string
+	Path        string
+	ImagePath   string
+	Title       string
+	PostNumber  string
+	Content     string
+	Href        string
+	SubText     string
+	DateWritten string
 }
 
 func NewMarkdownFilesFromDir(dir string) ([]*MarkdownFile, error) {
@@ -156,15 +161,36 @@ func NewMarkdownFileFromPath(path string) (*MarkdownFile, error) {
 	fileName := strings.Split(path, "/")[1]
 	fileNumber := strings.Split(fileName, "_")[0]
 	fileTitle := strings.Split(strings.Split(fileName, "_")[1], ".")[0]
-	imagePath := strings.Replace(path, "posts", "static/post_img", 1)
-	imagePath = strings.Replace(imagePath, ".md", ".jpg", 1)
+	fileTitle = strings.ReplaceAll(fileTitle, "_", " ")
+	imagePath := strings.Replace(path, "posts", "/static/post_img", 1)
+	imagePath = strings.Replace(imagePath, ".md", ".webp", 1)
+	doc, err := goquery.NewDocumentFromReader(strings.NewReader(mdContent))
+	if err != nil {
+		return file, err
+	}
+	metaDataElm := doc.Find("#meta")
+	var subText string
+	var dob string
+	metaDataElm.Find("*").Each(func(i int, sel *goquery.Selection) {
+		key, _ := sel.Attr("key")
+		if key == "subtext" {
+			val, _ := sel.Attr("value")
+			subText = val
+		}
+		if key == "dob" {
+			val, _ := sel.Attr("value")
+			dob = val
+		}
+	})
 	file = &MarkdownFile{
-		Path:       path,
-		PostNumber: fileNumber,
-		Title:      fileTitle,
-		Content:    mdContent,
-		ImagePath:  "./" + imagePath,
-		Href:       "/post/" + fileNumber,
+		Path:        path,
+		PostNumber:  fileNumber,
+		Title:       fileTitle,
+		Content:     mdContent,
+		ImagePath:   imagePath,
+		Href:        "/post/" + fileNumber,
+		SubText:     subText,
+		DateWritten: dob,
 	}
 	return file, nil
 }

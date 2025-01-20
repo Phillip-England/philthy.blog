@@ -26,9 +26,9 @@
 </head>
 <body class="h-screen flex flex-col dark:bg-dracula-background bg-gray-200 custom-scroll text-black dark:text-white">
     
-    {{ template "navbar" . }}
-
+    
     <div class="flex-1 self-center dark:bg-black bg-white items-center justify-center w-full sm:w-[90%] md:w-[80%] lg:w-[65%] xl:w-[45%] xl:max-w-[750px]">
+        {{ template "navbar" . }}
         {{ template "header" . }}
         {{ template "social" . }}
         <main class="pt-[155px] flex p-4 w-full">
