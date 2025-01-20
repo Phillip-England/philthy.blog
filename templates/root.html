@@ -24,15 +24,35 @@
     <hash-title-scroll offset='-140'></hash-title-scroll>
     <title>{{ .Title }}</title>
 </head>
-<body class="h-screen flex flex-col dark:bg-black bg-white custom-scroll text-black dark:text-white">
-    <main class="flex-grow relative">
-            {{ template "header" . }}
-            {{ template "social" . }}
-            {{ template "navbar" . }}
-            {{ template "overlay" . }}
-			{{ template "article" . }}
-            <title-links target='#article' offset="-140" link-wrapper-class="flex" link-class="p-4 w-full hover:underline border-l border-gray-200 dark:border-gray-800" class="fixed scrollbar-hidden overflow-y-scroll top-[155px] z-50 right-0 hidden lg:flex text-sm flex-col text-gray-600 dark:text-gray-400 h-full dark:bg-black bg-white hidden w-[20%]"></title-links>
-    </main>
+<body class="h-screen flex flex-col dark:bg-dracula-background bg-gray-200 custom-scroll text-black dark:text-white">
+    
+    {{ template "navbar" . }}
+
+    <div class="flex-1 self-center dark:bg-black bg-white items-center justify-center w-full sm:w-[90%] md:w-[80%] lg:w-[65%] xl:w-[45%] xl:max-w-[750px]">
+        {{ template "header" . }}
+        {{ template "social" . }}
+        <main class="pt-[155px] flex p-4 w-full">
+            <article id="article" class="h-full w-full flex flex-col">
+                <div class='flex flex-col gap-4 h-full'>
+                    <div class='flex flex-col gap-2'>
+                    <h1 class='text-3xl font-bold pt-4'>{{ .ArticleName }}</h1>
+                    <p class='text-xs text-gray-600 dark:text-gray-400'>{{ .DateWritten }}</p>
+                    </div>
+                    <p class='text-sm'>{{ .SubText }}<the-blinker rate="1000"></the-blinker></p>
+                    <img src="{{ .ImageSrc }}" class="w-[150px] rounded" />
+                    <random-beads count='12' class="pb-6"></random-beads>
+                </div>
+                    <tw-markdown>
+                        {{ .Content }}
+                    </tw-markdown>
+            </article>
+        </main>
+    </div>
+
+    <aside>
+        <title-links target='#article' offset="-140" link-wrapper-class="flex" link-class="p-4 w-full hover:underline border-b border-gray-200 dark:border-gray-800" class="fixed scrollbar-hidden overflow-y-scroll top-0 z-50 right-0 hidden xl:flex text-sm p-4 flex-col text-gray-600 dark:text-gray-400 h-full dark:bg-black bg-white hidden xl:w-[20%] xl:max-w-[300px]"></title-links>
+    </aside>
+
     <script src="/static/js/index.js"></script>
 </body>
 </html>

@@ -131,8 +131,8 @@ class TwMarkdown extends HTMLElement {
 		case "a":
 		  element.classList.add(
 			"text-blue-800",
-			"dark:text-blue-500",
 			"underline",
+            "visited:text-purple-500",
 		  );
 		  break;
 		case "img":

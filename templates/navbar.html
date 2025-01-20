@@ -1,5 +1,5 @@
 {{ define "navbar" }}
-    <nav class="md:flex fixed top-[90px] w-[30%] max-w-[400px] lg:w-[400px] border-r z-30 h-full bg-white dark:bg-black dark:border-gray-800 hidden">
+    <nav class="xl:flex hidden fixed top-[90px] xl:top-0 xl:left-0 w-full border-r z-30 h-full bg-white dark:bg-black dark:border-gray-800 sm:w-[90%] md:w-[80%] lg:w-[65%] xl:w-[20%] xl:max-w-[300px]">
         <ul class="flex flex-col p-2 w-full text-sm gap-2">
             {{ if strEquals .ReqPath "/" }}
                 <li class="flex border dark:border-gray-800 rounded bg-gray-200 dark:bg-gray-800">
@@ -11,7 +11,7 @@
                 </li>
             {{ end }}
             {{ if strEquals .ReqPath "/posts" }}
-                <li class="flex border dark:border-gray-800 rounded bg-gray-200">
+            <li class="flex border dark:border-gray-800 rounded bg-gray-200 dark:bg-gray-800">
                     <a href="/posts" class="p-4 w-full">Posts</a>
                 </li>
             {{ else }}
