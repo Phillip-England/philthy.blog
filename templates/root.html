@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
+    <meta name="description" content="{{ .MetaDescription }}">
+    <meta name="keywords" content="{{ .MetaKeywords }}">
+	<script src="https://unpkg.com/hyperscript.org@0.9.13" async></script>
     <link rel="stylesheet" href="/static/css/output.css">
     <custom-scroll></custom-scroll> 
     <script>
@@ -39,7 +41,7 @@
                     <p class='text-xs text-gray-600 dark:text-gray-400'>{{ .DateWritten }}</p>
                     </div>
                     <p class='text-sm'>{{ .SubText }}<the-blinker rate="1000"></the-blinker></p>
-                    <img src="{{ .ImageSrc }}" class="w-[150px] rounded" />
+                    <img src="{{ .ImageSrc }}" class="w-[150px] rounded" alt="An image to represent this blog post" />
                     <random-beads count='12' class="pb-6"></random-beads>
                 </div>
                     <tw-markdown>

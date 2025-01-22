@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -15,6 +16,7 @@ import (
 )
 
 const KeyTemplates = "KEYTEMPLATES"
+const TitleCatchPhrase = "Philthy Blog: Christianity, Doubt, and Faith"
 
 func main() {
 
@@ -56,14 +58,16 @@ func main() {
 			return
 		}
 		if r.URL.Path == "/" {
-			vbf.ExecuteTemplate(w, templates, "root.html", map[string]interface{}{
-				"Title":       "Welcome - Philthy Blog",
-				"Content":     template.HTML(mdContent),
-				"ReqPath":     r.URL.Path,
-				"ArticleName": "philthy.blog",
-				"SubText":     "Saying the things I'm afraid to say",
-				"ImageSrc":    "./static/img/profile-sm.png",
-				"DateWritten": "1/20/2025",
+			vbf.ExecuteTemplate(w, templates, "root.html", BaseTemplate{
+				Title:           "Welcome - " + TitleCatchPhrase,
+				Content:         template.HTML(mdContent),
+				ReqPath:         r.URL.Path,
+				ArticleName:     "philthy.blog",
+				SubText:         "Saying the things I'm afraid to say",
+				ImageSrc:        "./static/img/profile-sm.png",
+				DateWritten:     "1/20/2025",
+				MetaDescription: "Philthy Blog: A heartfelt exploration of Christianity, doubt, and the personal struggle with faith and God. Join an honest journey seeking truth, understanding, and peace.",
+				MetaKeywords:    "Christianity, God, Faith",
 			})
 		} else {
 			vbf.WriteString(w, "404 not found")
@@ -78,33 +82,37 @@ func main() {
 			w.WriteHeader(500)
 			return
 		}
-		vbf.ExecuteTemplate(w, templates, "root.html", map[string]interface{}{
-			"Title":       "Posts - Philthy Blog",
-			"Content":     template.HTML(mdContent),
-			"ReqPath":     r.URL.Path,
-			"ArticleName": "philthy.blog",
-			"SubText":     "Things I've written",
-			"ImageSrc":    "./static/img/posts-sm.jpg",
-			"DateWritten": "1/20/2025",
+		vbf.ExecuteTemplate(w, templates, "root.html", BaseTemplate{
+			Title:           "Posts - " + TitleCatchPhrase,
+			Content:         template.HTML(mdContent),
+			ReqPath:         r.URL.Path,
+			ArticleName:     "philthy.blog",
+			SubText:         "Things I've written",
+			ImageSrc:        "./static/img/posts-sm.jpg",
+			DateWritten:     "1/20/2025",
+			MetaDescription: "Philthy Blog: A heartfelt exploration of Christianity, doubt, and the personal struggle with faith and God. Here, see all the posts I've written.",
+			MetaKeywords:    "Christianity, God, Faith",
 		})
 	}, vbf.MwLogger)
 
 	vbf.AddRoute("GET /post/{postNumber}", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
-		postNumber := r.PathValue("postNumber")
-		mdFile, err := GetMarkdownFileByPostNumber(mdFiles, postNumber)
+		postStr := r.PathValue("postNumber")
+		postNumber, err := strconv.Atoi(postStr)
 		if err != nil {
-			vbf.WriteString(w, "404 not found")
+			w.WriteHeader(500)
 			return
 		}
-		vbf.ExecuteTemplate(w, templates, "root.html", map[string]interface{}{
-			"Title":       mdFile.Title + " - Philthy Blog",
-			"Content":     template.HTML(mdFile.Content),
-			"ReqPath":     r.URL.Path,
-			"ArticleName": mdFile.Title,
-			"SubText":     mdFile.SubText,
-			"ImageSrc":    mdFile.ImagePath,
-			"DateWritten": mdFile.DateWritten,
-			// "RecentPosts": recentPosts,
+		mdFile := mdFiles[postNumber]
+		vbf.ExecuteTemplate(w, templates, "root.html", BaseTemplate{
+			Title:           mdFile.Title + " - " + TitleCatchPhrase,
+			Content:         template.HTML(mdFile.Content),
+			ReqPath:         r.URL.Path,
+			ArticleName:     mdFile.Title,
+			SubText:         mdFile.SubText,
+			ImageSrc:        mdFile.ImagePath,
+			DateWritten:     mdFile.DateWritten,
+			MetaDescription: "Philthy Blog: " + mdFile.MetaDescription,
+			MetaKeywords:    mdFile.MetaKeywords,
 		})
 
 	}, vbf.MwLogger)
@@ -116,15 +124,29 @@ func main() {
 
 }
 
+type BaseTemplate struct {
+	Title           string
+	Content         template.HTML
+	ReqPath         string
+	ArticleName     string
+	SubText         string
+	ImageSrc        string
+	DateWritten     string
+	MetaDescription string
+	MetaKeywords    string
+}
+
 type MarkdownFile struct {
-	Path        string
-	ImagePath   string
-	Title       string
-	PostNumber  string
-	Content     string
-	Href        string
-	SubText     string
-	DateWritten string
+	Path            string
+	ImagePath       string
+	Title           string
+	PostNumber      string
+	Content         string
+	Href            string
+	SubText         string
+	DateWritten     string
+	MetaDescription string
+	MetaKeywords    string
 }
 
 func NewMarkdownFilesFromDir(dir string) ([]*MarkdownFile, error) {
@@ -171,6 +193,8 @@ func NewMarkdownFileFromPath(path string) (*MarkdownFile, error) {
 	metaDataElm := doc.Find("#meta")
 	var subText string
 	var dob string
+	var metaDescription string
+	var metaKeywords string
 	metaDataElm.Find("*").Each(func(i int, sel *goquery.Selection) {
 		key, _ := sel.Attr("key")
 		if key == "subtext" {
@@ -181,27 +205,28 @@ func NewMarkdownFileFromPath(path string) (*MarkdownFile, error) {
 			val, _ := sel.Attr("value")
 			dob = val
 		}
+		if key == "description" {
+			val, _ := sel.Attr("value")
+			metaDescription = val
+		}
+		if key == "keywords" {
+			val, _ := sel.Attr("value")
+			metaKeywords = val
+		}
 	})
 	file = &MarkdownFile{
-		Path:        path,
-		PostNumber:  fileNumber,
-		Title:       fileTitle,
-		Content:     mdContent,
-		ImagePath:   imagePath,
-		Href:        "/post/" + fileNumber,
-		SubText:     subText,
-		DateWritten: dob,
+		Path:            path,
+		PostNumber:      fileNumber,
+		Title:           fileTitle,
+		Content:         mdContent,
+		ImagePath:       imagePath,
+		Href:            "/post/" + fileNumber,
+		SubText:         subText,
+		DateWritten:     dob,
+		MetaDescription: metaDescription,
+		MetaKeywords:    metaKeywords,
 	}
 	return file, nil
-}
-
-func GetMarkdownFileByPostNumber(mdFiles []*MarkdownFile, number string) (*MarkdownFile, error) {
-	for _, file := range mdFiles {
-		if file.PostNumber == number {
-			return file, nil
-		}
-	}
-	return nil, fmt.Errorf(`post number %s does not exist`, number)
 }
 
 func CreatePostsMdFile(mdFiles []*MarkdownFile) error {

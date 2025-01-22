@@ -1,54 +1,39 @@
 ## Recent Posts
 0. [Dedicated](/post/0) *1/20/2025*
 
-## Why Am I Writing?
-I am writing because I aim to bring hope and comfort to those experiencing the loss of their Christian faith. Losing your faith can be catastrophic. The amount of fear and isolation that comes with the process can leave someone wishing they were never born. And so when you feel alone, I want you to know that you are not the only one going through this.
+## My Lack Of Truth
+Dead God, I come to you in my lack of truth. I come to you in my lack of understanding. I come to you wondering if you're even there. Fear drives me towards you. Fear makes me avoid you. But, here I am. Willing to be open and honest about everything. Nothing to hide.
 
-I write so that you can know someone who's been through what you are going through. I remember feeling like my thoughts were being actively invaded by satan and his demons. I remember looking in the mirror and thinking, *"The thoughts you are having could drag you and your loved ones to hell!"* And after I boiled everything down into its purest form, you know what was left? Fear.
+I come to you broken. I don't have any solutions. I don't have the answers. I don't understand why the Bible has to make you out to be so harsh. Would you rightly turn me into a pillar of salt? Or is that a myth to create the type of fear that lives within me? I don't know. I know I wouldn't want my child to live in such turmoil. Can you free me from this, please?
 
-The fear of being punished. The fear of missing out. The fear of harming others with my beliefs. The fear of hurting the Christians who love me. The fear of misleading my child. And the list goes on and on.
+I come to you aimless. When I first wrote this page, I had a clear goal and intent. I scrapped the whole draft. I'm not going to act like I know what I'm doing. I don't. I think the best thing I can do is be honest. I just want to be honest. I feel the pull to stay silent as a method of avoiding hell. Would you cast me into hell for being completely honest and genuine in my search?
 
-I am afraid, and so I write to be brave.
+I come to you hopeless. I feel this might be a burden I bear my entire life. I am afraid of aging because with each passing moment I find myself closer to your wrath. The anxiety is crippling. Where others find peace in the way you destroy your adversaries, I find discontent. I find discomfort in the idea that anyone would be destroyed by you.
 
-I write to say all the things I've been afraid of facing for the past 2 years.
+Lord, please don't destroy me.
 
-## Who Am I?
-My name is Phillip England, and at the time of this writing I am 31 years old (born in 1993). I live in Tulsa, Oklahoma and work at a local Chick-fil-A. I have been a Christian my entire life. Specifically, a Christian Fundamentalist. That is, I believed the entire Bible to be absolutely true (despite never having read it fully). If I had to put a denomination on it, I think Southern Baptist fits quite nicely. But, my views did shift a lot throughout the years.
+## An Honest Search
+I have had a lot of conversations over the past two years. When I thought I knew everything, there was no point in talking to anyone. But, when I recognized I did not have the truth, I took an interest in those who said they did. I allowed myself to take in information from anyone and everyone willing to share their thoughts.
 
-During my teens and early twenties, I struggled with a severe, life-threatening drug addiction. This set the stage for my deepened faith in adulthood. During the latter half of my drug addiction, I turned to God as a means to escape. Despite actively using drugs, I started reading my Bible and read through the majority of the New Testament. 
+One thing is clear: there are a lot of people out there that are smarter than I am.
 
-I'll never forget the moment I read the words of Jesus in Matthew 7:21-23. I had just gotten home from the movie theatre I worked at, and while everyone else was partying and drinking, I read:
+In my search, I found a lot of people who I could relate with. People who felt like their mental health had be negatively impacted by faith. People who were unable to reconcile the acts of the Old Testament God with the loving nature of Jesus. People who were continuing to believe out of fear. People who dared to ask, *"Are any of these ideas harmful?"*
 
-> "Not everyone who says to Me, ‘Lord, Lord,’ 
-> will enter the kingdom of heaven, 
-> but only he who does the will of My Father in heaven. 
-> Many will say to Me on that day, 
-> ‘Lord, Lord, did we not prophesy in Your name, 
-> and in Your name drive out demons and perform many miracles?’ 
-> Then I will tell them plainly, 
-> ‘I never knew you; depart from Me, you workers of lawlessness!"
+The more I dug, the more unsure I became.
 
-This verse scared me to death. Up until this point in my life, my faith was always something I adopted from other people. But for the first time in my life, I took ownership of my faith.
+The walls came up. *"Maybe you should just stop all this questioning and just believe?"*
 
-It didn't happen all at once, but over the course of the next 8 or so years, I slowly got my life together. Christianity played a huge role in that.
+But that would be cowardly and dishonest of me. If I were to turn back now I'd be doing so out of fear. I was scared within my faith and now I'm scared without it.
 
-But not everything that glitters is gold. Something can benefit your life in one way, while harming your life in another way.
+The truth does not shy away from the light of questions.
 
-## What Happened?
-It did not happen all at once. It was gradual. A small thought here. A discrepancy there. I tried to ignore it. I did not want to lose my faith, it was uncomfortable, like a toothache. The pressure mounted and cracks started forming on the surface of my faith. I used all the duct tape I could find to hold things together.
+## With You By My Side
+I want to go through this journey with you, God. This is not about getting away with bad behavior, and you know that. You know my heart and intentions. This is about forgoing everything I used to know to make room for the truth. I used to say, *"This is who God is!"*, and now I'm asking, *"Who are you, God?"*
 
-I found myself frustrated at the idea of Muslims going to hell. I felt like they did not really have a solid choice in what they believe. "They are a product of their culture and environment", I thought. Was I a product of my culture and environment?
+I want to know and be known by you.
 
-I found myself unable to reconcile some of the actions of the Biblical God in the Old Testament. "Why would God command the Israelites to take the virgins of Jericho as spoils of war?" It felt like something men would write (and want), not a loving God.
+I hope to find you and bring clarity to my life. I hope to find confidence and assurance in my faith. I do not wish to lose the faith of my upbringing. And even if the evidence points me away from the Bible, the fear of burning might still be enough to keep me latched on.
 
-I recognized within myself the capacity to ignore, justify, and explain away just about anything. "I believe in a book I haven't even fully read", I thought. Do my beliefs even line up with the words of the Bible? If I am capable of defending a book I haven't even read, how much more diluted am I in other areas?
+I find these ideas so damaging God, but you're supposed to be loving. I find these thoughts to harm me and my perceptions, yet they are derived from your good book. Please, help me to make sense of all of this. Help me to find peace in my lack of understanding.
 
-I started having discussions with anyone willing to talk to me. It was a painful process. It became clear that most people have not thought about their faith past the surface level. They were just like me, simply believing what their parents, culture, and environment taught them to think and say. Alarm bells went off.
-
-Despite the outward appearance of Christianity being open and inviting to questions, this is not what I found in reality. I found a faith avoidant of the light of questioning. I discovered that a lack of questioning was the only thing keeping the doubts at bay.
-
-I discovered that Christianity is what Christians say it is. You can read your Bible, and if you guarded yourself from outside influence, the interpretation you walk away with will be starkly different than the interpretation of another who's done the same. And both readers may find themselves feeling like their perspective is a gift from the divine.
-
-Because questioning felt so scary, I started to believe it was the right thing to do. The scariest things in life have the most potential to grow my character. I remember hearing Matt Delahunty say, "Is fear a good reason to believe in something?" 
-
-Once I recognized that fear was not a good reason to believe something, I knocked everything off the table and started from ground zero. And I've been scared ever since.
+Lord, please don't burn me for saying the things I'm afraid to say.
