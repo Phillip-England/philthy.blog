@@ -105,7 +105,7 @@ func main() {
 		mdFile := mdFiles[postNumber]
 		vbf.ExecuteTemplate(w, templates, "root.html", BaseTemplate{
 			Title:           mdFile.Title + " - " + TitleCatchPhrase,
-			Content:         template.HTML(mdFile.Content),
+			Content:         mdFile.Content,
 			ReqPath:         r.URL.Path,
 			ArticleName:     mdFile.Title,
 			SubText:         mdFile.SubText,
@@ -141,7 +141,7 @@ type MarkdownFile struct {
 	ImagePath       string
 	Title           string
 	PostNumber      string
-	Content         string
+	Content         template.HTML
 	Href            string
 	SubText         string
 	DateWritten     string
@@ -218,7 +218,7 @@ func NewMarkdownFileFromPath(path string) (*MarkdownFile, error) {
 		Path:            path,
 		PostNumber:      fileNumber,
 		Title:           fileTitle,
-		Content:         mdContent,
+		Content:         template.HTML(mdContent),
 		ImagePath:       imagePath,
 		Href:            "/post/" + fileNumber,
 		SubText:         subText,
