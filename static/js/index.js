@@ -40,6 +40,7 @@ class TwMarkdown extends HTMLElement {
 			"pb-4",
 			"pt-4",
 			"border-t",
+            "border-gray-200",
 			"dark:border-gray-800",
 		  );
 		  break;
@@ -96,7 +97,7 @@ class TwMarkdown extends HTMLElement {
 			// "pl-1",
 			// "border-l-1",
             "bg-gray-200",
-            "dark:bg-gray-800",
+            "dark:bg-dracula-background",
             "w-fit",
             "p-4",
             "rounded",
@@ -338,7 +339,32 @@ class TwMarkdown extends HTMLElement {
 	}
   }
 
- 
+  class BibleQuote extends HTMLElement {
+    constructor() {
+      super();
+      this.title = this.getAttribute('title') || 'Verse';
+      this.translation = this.getAttribute('translation') || 'Translation';
+      this.verse = this.innerHTML.trim() || 'Verse text goes here.';
+    }
+  
+    connectedCallback() {
+      this.render();
+    }
+  
+    render() {
+      this.innerHTML = `
+        <div class="bible-quote p-4 border border-gray-300 dark:border-dracula-background rounded mb-4 text-gray-600 dark:text-gray-400">
+          <div class="bible-quote-header mb-4">
+            <h2 class="text-lg">${this.title}</h2>
+            <p class="text-xs italic">(${this.translation})</p>
+          </div>
+          <div class="bible-quote-body">
+            <p class="text-sm">${this.verse}</p>
+          </div>
+        </div>
+      `;
+    }
+  }
   
   
   window.addEventListener("DOMContentLoaded", () => {
@@ -348,4 +374,5 @@ class TwMarkdown extends HTMLElement {
 	customElements.define("title-links", TitleLinks);
 	customElements.define('hash-title-scroll', HashTitleScroll)
 	customElements.define('custom-scroll', CustomScroll)
+    customElements.define('bible-quote', BibleQuote);
   });

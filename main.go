@@ -88,7 +88,7 @@ func main() {
 			ReqPath:         r.URL.Path,
 			ArticleName:     "philthy.blog",
 			SubText:         "Things I've written",
-			ImageSrc:        "./static/img/posts-sm.jpg",
+			ImageSrc:        "./static/img/posts-sm.webp",
 			DateWritten:     "1/20/2025",
 			MetaDescription: "Philthy Blog: A heartfelt exploration of Christianity, doubt, and the personal struggle with faith and God. Here, see all the posts I've written.",
 			MetaKeywords:    "Christianity, God, Faith",
@@ -244,7 +244,7 @@ func CreatePostsMdFile(mdFiles []*MarkdownFile) error {
 	defer file.Close()
 	file.WriteString("## All Posts\n")
 	for _, mdFile := range mdFiles {
-		file.WriteString(fmt.Sprintf(`%s. [%s](%s)`, mdFile.PostNumber, mdFile.Title, mdFile.Href))
+		file.WriteString(fmt.Sprintf(`%s. [%s](%s) *%s*`, mdFile.PostNumber, mdFile.Title, mdFile.Href, mdFile.DateWritten))
 	}
 	return nil
 }
