@@ -25,7 +25,7 @@
 </head>
 <body class="h-screen flex flex-col dark:bg-black bg-white custom-scroll text-black dark:text-white">
 
-    <header class="p-4 border-b flex justify-between border-gray-200 dark:border-gray-800">
+    <header class="p-4 border-b flex justify-between border-gray-200 dark:border-gray-800 fixed top-0 bg-black z-30 w-full h-[65px]">
         <div _="on click go back" class="cursor-pointer">
             <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
@@ -49,6 +49,8 @@
             </div>
         </div>
     </header>
+
+	<div class="h-[65px]"></div>
 
 	<div id="logo" class="top-[125px] left-[70px] w-[200px] fixed">
 		<img class="dark:hidden" src="/static/img/logo-black.svg"/>
@@ -146,9 +148,23 @@
                 console.error('Speech recognition error:', event.error);
             };
 
-            recognition.onend = () => {
-                console.log('Speech recognition stopped.');
-            };
+			let recognitionTimer;
+			const MAX_SESSION_TIME = 240000; // 4 minutes in milliseconds
+
+			recognition.onstart = () => {
+				console.log('Speech recognition started.');
+				recognitionTimer = setTimeout(() => {
+					console.log('Restarting speech recognition session...');
+					recognition.stop(); // Stopping triggers `onend`
+				}, MAX_SESSION_TIME);
+			};
+
+			recognition.onend = () => {
+				clearTimeout(recognitionTimer); // Clear the previous timer
+				recognition.start(); // Restart the session
+			};
+
+
 
             // Start listening for speech
             recognition.start();
