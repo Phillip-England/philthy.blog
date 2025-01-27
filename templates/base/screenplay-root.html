@@ -107,74 +107,101 @@
 		});
 
 
-
-        // Check if the browser supports speech recognition
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-        if (SpeechRecognition) {
-            const recognition = new SpeechRecognition();
-            recognition.continuous = true; // Keep listening until stopped
-            recognition.interimResults = true; // Show interim results
-            recognition.lang = 'en-US'; // Set language to English (US)
+if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
 
-            const playback = document.querySelector('#playback');
-            let finalTranscript = ''; // To store the finalized transcript
+    const playback = document.querySelector('#playback');
+    let finalTranscript = '';
+    let retryCount = 0;
+    const MAX_RETRIES = 3;
+    let isShuttingDown = false;
 
-            recognition.onresult = (event) => {
-                let interimTranscript = ''; // Temporary transcript for interim results
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    const result = event.results[i];
-                    if (result.isFinal) {
-                        // Append finalized result to finalTranscript
-                        finalTranscript += result[0].transcript.trim() + ' ';
-                    } else {
-                        // Capture interim results
-                        interimTranscript += result[0].transcript;
-                    }
-                }
-
-                // Display the live text in the main section
-                const fullTranscript = finalTranscript + interimTranscript;
-                const words = fullTranscript.trim().split(' ');
-                const lastWord = words.pop(); // Get the last word
-                playback.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
-				window.scrollTo({
-					top: document.body.scrollHeight,
-					behavior: 'smooth' // Adds a smooth scrolling effect
-				});
-            };
-
-            recognition.onerror = (event) => {
-                console.error('Speech recognition error:', event.error);
-            };
-
-			let recognitionTimer;
-			const MAX_SESSION_TIME = 240000; // 4 minutes in milliseconds
-
-			recognition.onstart = () => {
-				console.log('Speech recognition started.');
-				recognitionTimer = setTimeout(() => {
-					console.log('Restarting speech recognition session...');
-					recognition.stop(); // Stopping triggers `onend`
-				}, MAX_SESSION_TIME);
-			};
-
-			recognition.onend = () => {
-				clearTimeout(recognitionTimer); // Clear the previous timer
-				recognition.start(); // Restart the session
-			};
-
-
-
-            // Start listening for speech
-            recognition.start();
-            console.log('Speech recognition started. Speak into the microphone.');
-        } else {
-            console.warn('Speech recognition not supported in this browser.');
+    recognition.onresult = (event) => {
+        let interimTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            const result = event.results[i];
+            if (result.isFinal) {
+                finalTranscript += result[0].transcript.trim() + ' ';
+            } else {
+                interimTranscript += result[0].transcript;
+            }
         }
 
-		const playback = document.querySelector('#playback');
+        const fullTranscript = finalTranscript + interimTranscript;
+        const words = fullTranscript.trim().split(' ');
+        const lastWord = words.pop();
+        playback.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    };
 
+    recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        if (!isShuttingDown) {
+            handleError();
+        }
+    };
+
+    let recognitionTimer;
+    const MAX_SESSION_TIME = 240000; // 4 minutes
+
+    recognition.onstart = () => {
+        console.log('Speech recognition started.');
+        recognitionTimer = setTimeout(() => {
+            console.log('Restarting speech recognition session...');
+            recognition.stop();
+        }, MAX_SESSION_TIME);
+    };
+
+    recognition.onend = () => {
+        clearTimeout(recognitionTimer);
+        if (!isShuttingDown) {
+            recognition.start();
+        }
+    };
+
+    const handleError = () => {
+        retryCount++;
+        console.log(`Retry attempt ${retryCount} of ${MAX_RETRIES}`);
+        
+        if (retryCount >= MAX_RETRIES) {
+            console.log('Max retries reached. Shutting down speech recognition.');
+            isShuttingDown = true;
+            recognition.stop();
+            playback.innerHTML += '<p class="text-red-500">Speech recognition has been disabled due to repeated errors. Please refresh the page to try again.</p>';
+            return;
+        }
+
+        // Wait for a short delay before retrying
+        setTimeout(() => {
+            try {
+                recognition.start();
+            } catch (e) {
+                console.error('Failed to restart speech recognition:', e);
+                handleError();
+            }
+        }, 1000 * retryCount); // Increasing delay with each retry
+    };
+
+    // Initial start
+    try {
+        recognition.start();
+        console.log('Speech recognition started. Speak into the microphone.');
+    } catch (e) {
+        console.error('Failed to start speech recognition:', e);
+        handleError();
+    }
+} else {
+    console.warn('Speech recognition not supported in this browser.');
+    playback.innerHTML = '<p class="text-red-500">Speech recognition is not supported in this browser.</p>';
+}
 		
     </script>
 
