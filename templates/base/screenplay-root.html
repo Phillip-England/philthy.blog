@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://unpkg.com/hyperscript.org@0.9.13" async></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.13" async></script>
     <link rel="stylesheet" href="/static/css/output.css">
-    <custom-scroll></custom-scroll> 
+    <custom-scroll></custom-scroll>
     <script>
         document.documentElement.classList.toggle('dark', localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches))
         window.addEventListener("DOMContentLoaded", () => {
@@ -21,12 +21,11 @@
             });
         });
     </script>
-    <hash-title-scroll offset='-140'></hash-title-scroll>
     <title>{{ .Title }}</title>
 </head>
-<body class="h-screen flex flex-col dark:bg-dracula-background bg-gray-200 custom-scroll text-black dark:text-white">
+<body class="h-screen flex flex-col dark:bg-black bg-white custom-scroll text-black dark:text-white">
 
-    <header class="p-4 border-b flex justify-between">
+    <header class="p-4 border-b flex justify-between border-gray-200 dark:border-gray-800">
         <div _="on click go back" class="cursor-pointer">
             <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
@@ -34,59 +33,134 @@
         </div>
         <div>
             <div class="flex flex-row gap-4">
+				<svg id="expand" class="w-8 h-8 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H4m0 0v4m0-4 5 5m7-5h4m0 0v4m0-4-5 5M8 20H4m0 0v-4m0 4 5-5m7 5h4m0 0v-4m0 4-5-5"/>
+				</svg>
+				<svg id="compress" class="w-8 h-8 hidden cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h4V4m12 4h-4V4M4 16h4v4m12-4h-4v4"/>
+				</svg>
                 <svg id="moon" class="w-8 h-8 cursor-pointer flex dark:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M11.675 2.015a.998.998 0 0 0-.403.011C6.09 2.4 2 6.722 2 12c0 5.523 4.477 10 10 10 4.356 0 8.058-2.784 9.43-6.667a1 1 0 0 0-1.02-1.33c-.08.006-.105.005-.127.005h-.001l-.028-.002A5.227 5.227 0 0 0 20 14a8 8 0 0 1-8-8c0-.952.121-1.752.404-2.558a.996.996 0 0 0 .096-.428V3a1 1 0 0 0-.825-.985Z" clip-rule="evenodd"></path>
                 </svg>
                 <svg id="sun" class="w-8 h-8 hidden cursor-pointer dark:flex" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clip-rule="evenodd"></path>
                 </svg>
+				  
             </div>
         </div>
     </header>
 
-    <main>
+	<div id="logo" class="top-[125px] left-[70px] w-[200px] fixed">
+		<img class="dark:hidden" src="/static/img/logo-black.svg"/>
+		<img class="dark:flex hidden" src="/static/img/logo-white.svg"/>
+	</div>
 
+    <main class="p-12 flex flex-row items-center justify-center w-full">
+		<div id="playback" class="block flex-1 ml-[25%] mr-[25%]">
+
+		</div>
     </main>
 
     <script>
+
+		let expand = document.querySelector('#expand');
+		let compress = document.querySelector('#compress');
+
+		expand.addEventListener('click', () => {
+			// Toggle classes for expand/compress buttons
+			expand.classList.remove('flex');
+			expand.classList.add('hidden');
+			compress.classList.remove('hidden');
+			compress.classList.add('flex');
+
+			// Enter full-screen mode
+			if (document.documentElement.requestFullscreen) {
+				document.documentElement.requestFullscreen();
+			} else if (document.documentElement.webkitRequestFullscreen) { // Safari
+				document.documentElement.webkitRequestFullscreen();
+			} else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+				document.documentElement.msRequestFullscreen();
+			} else {
+				console.warn('Fullscreen mode is not supported by this browser.');
+			}
+		});
+
+		compress.addEventListener('click', () => {
+			// Toggle classes for compress/expand buttons
+			compress.classList.add('hidden');
+			compress.classList.remove('flex');
+			expand.classList.remove('hidden');
+			expand.classList.add('flex');
+
+			// Exit full-screen mode
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else if (document.webkitExitFullscreen) { // Safari
+				document.webkitExitFullscreen();
+			} else if (document.msExitFullscreen) { // IE/Edge
+				document.msExitFullscreen();
+			} else {
+				console.warn('Exiting full-screen mode is not supported by this browser.');
+			}
+		});
+
+
+
         // Check if the browser supports speech recognition
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    
+
         if (SpeechRecognition) {
             const recognition = new SpeechRecognition();
             recognition.continuous = true; // Keep listening until stopped
             recognition.interimResults = true; // Show interim results
             recognition.lang = 'en-US'; // Set language to English (US)
-    
-            const main = document.querySelector('main');
-    
+
+            const playback = document.querySelector('#playback');
+            let finalTranscript = ''; // To store the finalized transcript
+
             recognition.onresult = (event) => {
-                let transcript = '';
+                let interimTranscript = ''; // Temporary transcript for interim results
                 for (let i = event.resultIndex; i < event.results.length; i++) {
-                    transcript += event.results[i][0].transcript;
+                    const result = event.results[i];
+                    if (result.isFinal) {
+                        // Append finalized result to finalTranscript
+                        finalTranscript += result[0].transcript.trim() + ' ';
+                    } else {
+                        // Capture interim results
+                        interimTranscript += result[0].transcript;
+                    }
                 }
-    
-                // Display the transcript in the <main> element
-                main.textContent = transcript;
+
+                // Display the live text in the main section
+                const fullTranscript = finalTranscript + interimTranscript;
+                const words = fullTranscript.trim().split(' ');
+                const lastWord = words.pop(); // Get the last word
+                playback.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
+				window.scrollTo({
+					top: document.body.scrollHeight,
+					behavior: 'smooth' // Adds a smooth scrolling effect
+				});
             };
-    
+
             recognition.onerror = (event) => {
                 console.error('Speech recognition error:', event.error);
             };
-    
+
             recognition.onend = () => {
                 console.log('Speech recognition stopped.');
             };
-    
+
             // Start listening for speech
             recognition.start();
-    
             console.log('Speech recognition started. Speak into the microphone.');
         } else {
             console.warn('Speech recognition not supported in this browser.');
         }
-    </script>
 
+		const playback = document.querySelector('#playback');
+
+		
+    </script>
 
     <script src="/static/js/index.js"></script>
 </body>
