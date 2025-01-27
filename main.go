@@ -117,11 +117,22 @@ func main() {
 
 	}, vbf.MwLogger)
 
+	vbf.AddRoute("GET /screenplay", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
+		vbf.ExecuteTemplate(w, templates, "screenplay-root.html", ScreenplayTemplate{
+			Title: "Philthy Blog: Screenplay",
+		})
+
+	}, vbf.MwLogger)
+
 	err = vbf.Serve(mux, "8080")
 	if err != nil {
 		panic(err)
 	}
 
+}
+
+type ScreenplayTemplate struct {
+	Title string
 }
 
 type BaseTemplate struct {

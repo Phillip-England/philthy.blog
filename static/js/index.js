@@ -353,7 +353,7 @@ class TwMarkdown extends HTMLElement {
   
     render() {
       this.innerHTML = `
-        <div class="bible-quote p-4 border border-gray-300 dark:border-dracula-background rounded mb-4 text-gray-600 dark:text-gray-400">
+        <div class="bible-quote p-4 border border-gray-300 dark:border-dracula-background rounded mb-4 text-gray-800 dark:text-gray-400">
           <div class="bible-quote-header mb-4">
             <h2 class="text-lg">${this.title}</h2>
             <p class="text-xs italic">(${this.translation})</p>
