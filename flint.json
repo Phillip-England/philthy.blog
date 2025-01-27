@@ -1,0 +1,13 @@
+{
+    "host": "http://localhost:8080",
+    "static": "./static",
+    "favicon": "./favicon.ico",
+    "out": "./out",
+    "target": "https://phillip-england.github.io/www.philthy.blog",
+    "routes": [
+        "/",
+        "/posts",
+        "/screenplay",
+        "/post/0"
+    ]
+}
