@@ -58,7 +58,7 @@
 		<img class="dark:flex hidden" src="/static/img/logo-white.svg"/>
 	</div>
 
-    <main class="p-12 flex flex-row items-center justify-center w-full">
+    <main class="p-12 flex flex-row items-center justify-center w-full text-2xl">
 		<div id="playback" class="block flex-1 ml-[25%] mr-[25%]">
 
 		</div>
@@ -122,26 +122,28 @@ if (SpeechRecognition) {
     const MAX_RETRIES = 3;
     let isShuttingDown = false;
 
-    recognition.onresult = (event) => {
-        let interimTranscript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-            const result = event.results[i];
-            if (result.isFinal) {
-                finalTranscript += result[0].transcript.trim() + ' ';
-            } else {
-                interimTranscript += result[0].transcript;
-            }
-        }
+	recognition.onresult = (event) => {
+		let interimTranscript = '';
+		for (let i = event.resultIndex; i < event.results.length; i++) {
+			const result = event.results[i];
+			if (result.isFinal) {
+				finalTranscript += result[0].transcript.trim() + ' ';
+			} else {
+				interimTranscript += result[0].transcript;
+			}
+		}
 
-        const fullTranscript = finalTranscript + interimTranscript;
-        const words = fullTranscript.trim().split(' ');
-        const lastWord = words.pop();
-        playback.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-        });
-    };
+		// Apply replacements to both final and interim transcripts
+		const fullTranscript = (finalTranscript + interimTranscript).replace(/\bfilthy\b/gi, 'philthy').replace(/\bphilip\b/gi, 'phillip');
+
+		const words = fullTranscript.trim().split(' ');
+		const lastWord = words.pop();
+		playback.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
+		window.scrollTo({
+			top: document.body.scrollHeight,
+			behavior: 'smooth'
+		});
+	};
 
     recognition.onerror = (event) => {
         console.error('Speech recognition error:', event.error);
