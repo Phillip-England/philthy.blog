@@ -9,7 +9,7 @@
 ## I Believe In God
 I come to you unsure of where to turn with my life. I know I believe in you, but I also want to be open and honest about how I feel about other aspects of my Christian upbringing. Maybe writing to you will help to bring me some clarity.
 
-I am not sure *which* God you are, but I do believe you are God. When I read the stories of the Old Testament, I read of a harsh war God set against his enemies. When I read stories of Jesus, I see in you love and compassion.
+I am not sure *which* God you are, but I do believe you are God. I am not sure anybody really knows. When I read the stories of the Old Testament, I read of a harsh war God set against his enemies. When I read stories of Jesus, I see in you love and compassion.
 
 I find it very difficult to square these two ideas. I have a hard time submitting to a figure who calls for constant bloodshed. Who requires blood to grant forgiveness. These ideas seem to me to be that of ancient men concerned with war and conquest. I do not hear these ideas and think, "now that sounds like the creator of the cosmos who loves and cares for us."
 
