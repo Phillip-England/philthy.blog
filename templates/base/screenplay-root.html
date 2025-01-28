@@ -34,6 +34,12 @@
         </div>
         <div>
             <div class="flex flex-row gap-4">
+                <svg id="play" class="w-8 h-8 cursor-pointer text-red-500" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                </svg>
+                <svg id="stop" class="w-8 h-8 cursor-pointer hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7Z"/>
+                </svg>
 				<svg id="expand" class="w-8 h-8 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
 					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H4m0 0v4m0-4 5 5m7-5h4m0 0v4m0-4-5 5M8 20H4m0 0v-4m0 4 5-5m7 5h4m0 0v-4m0 4-5-5"/>
 				</svg>
@@ -46,7 +52,7 @@
                 <svg id="sun" class="w-8 h-8 hidden cursor-pointer dark:flex" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clip-rule="evenodd"></path>
                 </svg>
-				  
+                  
             </div>
         </div>
     </header>
@@ -59,154 +65,138 @@
 	</div>
 
     <main class="p-12 flex flex-row items-center justify-center w-full text-[128px]">
-		<div id="playback" class="block flex-1 ml-[25%]">
+		<div id="whiteboard" class="block flex-1 ml-[25%]">
 
 		</div>
     </main>
 
     <script>
 
-		let expand = document.querySelector('#expand');
-		let compress = document.querySelector('#compress');
-
-		expand.addEventListener('click', () => {
-			// Toggle classes for expand/compress buttons
-			expand.classList.remove('flex');
-			expand.classList.add('hidden');
-			compress.classList.remove('hidden');
-			compress.classList.add('flex');
-
-			// Enter full-screen mode
-			if (document.documentElement.requestFullscreen) {
-				document.documentElement.requestFullscreen();
-			} else if (document.documentElement.webkitRequestFullscreen) { // Safari
-				document.documentElement.webkitRequestFullscreen();
-			} else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-				document.documentElement.msRequestFullscreen();
-			} else {
-				console.warn('Fullscreen mode is not supported by this browser.');
-			}
-		});
-
-		compress.addEventListener('click', () => {
-			// Toggle classes for compress/expand buttons
-			compress.classList.add('hidden');
-			compress.classList.remove('flex');
-			expand.classList.remove('hidden');
-			expand.classList.add('flex');
-
-			// Exit full-screen mode
-			if (document.exitFullscreen) {
-				document.exitFullscreen();
-			} else if (document.webkitExitFullscreen) { // Safari
-				document.webkitExitFullscreen();
-			} else if (document.msExitFullscreen) { // IE/Edge
-				document.msExitFullscreen();
-			} else {
-				console.warn('Exiting full-screen mode is not supported by this browser.');
-			}
-		});
-
-
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-if (SpeechRecognition) {
-    const recognition = new SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = 'en-US';
-
-    const playback = document.querySelector('#playback');
-    let finalTranscript = '';
-    let retryCount = 0;
-    const MAX_RETRIES = 3;
-    let isShuttingDown = false;
-
-	recognition.onresult = (event) => {
-		let interimTranscript = '';
-		for (let i = event.resultIndex; i < event.results.length; i++) {
-			const result = event.results[i];
-			if (result.isFinal) {
-				finalTranscript += result[0].transcript.trim() + ' ';
-			} else {
-				interimTranscript += result[0].transcript;
-			}
-		}
-
-		// Apply replacements to both final and interim transcripts
-		const fullTranscript = (finalTranscript + interimTranscript).replace(/\bfilthy\b/gi, 'philthy').replace(/\bphilip\b/gi, 'phillip');
-
-		const words = fullTranscript.trim().split(' ');
-		const lastWord = words.pop();
-		playback.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
-		window.scrollTo({
-			top: document.body.scrollHeight,
-			behavior: 'smooth'
-		});
-	};
-
-    recognition.onerror = (event) => {
-        console.error('Speech recognition error:', event.error);
-        if (!isShuttingDown) {
-            handleError();
-        }
-    };
-
-    let recognitionTimer;
-    const MAX_SESSION_TIME = 240000; // 4 minutes
-
-    recognition.onstart = () => {
-        console.log('Speech recognition started.');
-        recognitionTimer = setTimeout(() => {
-            console.log('Restarting speech recognition session...');
-            recognition.stop();
-        }, MAX_SESSION_TIME);
-    };
-
-    recognition.onend = () => {
-        clearTimeout(recognitionTimer);
-        if (!isShuttingDown) {
-            recognition.start();
-        }
-    };
-
-    const handleError = () => {
-        retryCount++;
-        console.log(`Retry attempt ${retryCount} of ${MAX_RETRIES}`);
-        
-        if (retryCount >= MAX_RETRIES) {
-            console.log('Max retries reached. Shutting down speech recognition.');
-            isShuttingDown = true;
-            recognition.stop();
-            playback.innerHTML += '<p class="text-red-500">Speech recognition has been disabled due to repeated errors. Please refresh the page to try again.</p>';
-            return;
-        }
-
-        // Wait for a short delay before retrying
-        setTimeout(() => {
-            try {
-                recognition.start();
-            } catch (e) {
-                console.error('Failed to restart speech recognition:', e);
-                handleError();
+        let expand = document.querySelector('#expand');
+        let compress = document.querySelector('#compress');
+        const play = document.querySelector('#play');
+        const stop = document.querySelector('#stop');
+        const whiteboard = document.querySelector('#whiteboard');
+    
+        let recognition = null; // Make recognition globally accessible
+        let isShuttingDown = false; // To prevent restarting when stopping
+    
+        expand.addEventListener('click', () => {
+            expand.classList.remove('flex');
+            expand.classList.add('hidden');
+            compress.classList.remove('hidden');
+            compress.classList.add('flex');
+    
+            // Enter full-screen mode
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // safari
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // ie/edge
+                document.documentElement.msRequestFullscreen();
+            } else {
+                console.warn('Fullscreen mode is not supported by this browser.');
             }
-        }, 1000 * retryCount); // Increasing delay with each retry
-    };
+        });
+    
+        compress.addEventListener('click', () => {
+            compress.classList.add('hidden');
+            compress.classList.remove('flex');
+            expand.classList.remove('hidden');
+            expand.classList.add('flex');
+    
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { // safari
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { // ie/edge
+                document.msExitFullscreen();
+            } else {
+                console.warn('Exiting full-screen mode is not supported by this browser.');
+            }
+        });
+    
+        play.addEventListener('click', () => {
+            play.classList.add('hidden');
+            stop.classList.remove('hidden');
+            startSpeechRecognition();
+        });
+    
+        stop.addEventListener('click', () => {
+            play.classList.remove('hidden');
+            stop.classList.add('hidden');
+            stopSpeechRecognition();
+        });
+    
+        function startSpeechRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                console.warn('Speech recognition not supported in this browser.');
+                whiteboard.innerHTML = '<p class="text-red-500">Speech recognition is not supported in this browser.</p>';
+                return;
+            }
+    
+            recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+            let finalTranscript = '';
+            let retryCount = 0;
+            const MAX_RETRIES = 3;
+    
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const result = event.results[i];
+                    if (result.isFinal) {
+                        finalTranscript += result[0].transcript.trim() + ' ';
+                    } else {
+                        interimTranscript += result[0].transcript;
+                    }
+                }
+                const fullTranscript = (finalTranscript + interimTranscript).replace(/\bfilthy\b/gi, 'philthy').replace(/\bphilip\b/gi, 'phillip');
+    
+                const words = fullTranscript.trim().split(' ');
+                const lastWord = words.pop();
+                whiteboard.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+            };
+    
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+            };
+    
+            recognition.onend = () => {
+                if (!isShuttingDown) {
+                    recognition.start();
+                }
+            };
+    
+            recognition.start();
+            console.log('Speech recognition started. Speak into the microphone.');
+        }
+    
+        function stopSpeechRecognition() {
+            if (recognition) {
+                isShuttingDown = true;
+                recognition.stop(); 
+                recognition = null; 
+            }
+            whiteboard.innerHTML = '';
+            console.log('Speech recognition stopped and whiteboard cleared.');
+            setTimeout(() => {
+                whiteboard.innerHTML = '';
+                console.log('Whiteboard cleared again after 500ms delay.');
+            }, 500);
 
-    // Initial start
-    try {
-        recognition.start();
-        console.log('Speech recognition started. Speak into the microphone.');
-    } catch (e) {
-        console.error('Failed to start speech recognition:', e);
-        handleError();
-    }
-} else {
-    console.warn('Speech recognition not supported in this browser.');
-    playback.innerHTML = '<p class="text-red-500">Speech recognition is not supported in this browser.</p>';
-}
-		
+            isShuttingDown = false;
+        }
+        
     </script>
+    
 
     <script src="/static/js/index.js"></script>
 </body>
