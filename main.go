@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/Phillip-England/vbf"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/phillip-england/vbf"
 )
 
 const KeyTemplates = "KEYTEMPLATES"

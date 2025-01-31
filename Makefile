@@ -15,3 +15,6 @@ kill:
 
 run:
 	air
+
+install:
+	flint spark; mv out ..; cd ..; mv out www.philthy.blog; cd www.philthy.blog; rm -r index.html; rm -r post; rm -r posts.html; rm -r screenplay.html; rm -r favicon.ico; rm -r static; cd out; mv * ..; cd ..; rm -r out;

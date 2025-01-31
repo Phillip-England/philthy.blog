@@ -16,9 +16,9 @@ I find it very difficult to square these two ideas. I have a hard time submittin
 But who am I to make such a call?
 
 ## I Want To Be Honest
-I am dedicated to these ideas and the pursuit of knowing who you are. In the past, I felt the need to keep my doubts to myself for fear of leading others astray. That is, I felt something was fundamentally wrong with me for think the Bible might have flaws. Now, I feel it is wrong to pretend that I accept a book at face value, especially when I have not even read it all.
+I am dedicated to these ideas and the pursuit of knowing who you are. In the past, I felt the need to keep my doubts to myself for fear of leading others astray. That is, I felt something was fundamentally wrong with me for thinking the Bible might have flaws. Now, I feel it is wrong to pretend that I accept a book at face value, especially when I have not even read it all.
 
-I am dedicated to reading the Bible in it's entirety and being completely open and honest about how the words on the page make me feel. I am not entering this expedition with an intent on proving the Bible true or false. I am simply going to engage with it like I would any other text. I aim to dig deep. To understand the historical context. To learn all the things that were left out of my typically Sunday morning Christian experience.
+I am dedicated to reading the Bible in it's entirety and being completely open and honest about how the words on the page make me feel. I am not entering this expedition with an intent on proving the Bible true or false. I am simply going to engage with it like I would any other text. I aim to dig deep. To understand the historical context. To learn all the things that were left out of my typical Sunday morning Christian experience.
 
 I want to know and be known by you. And if I can find you in that book, I will search fervently.
 
@@ -59,4 +59,4 @@ Going from knowing everything to knowing nothing is a jarring experience.
 
 I aim to dedicate myself to you God. To knowing you. To seeking you out in all the nooks and crannies of my life. To honoring you with my behavior in the best way that I can.
 
-And I will do this despite my fears. I am terrified to embark on this journey, but to turn back now would to submit to my cowardice. I am tired of being a coward.
+And I will do this despite my fears. I am terrified to embark on this journey, but to turn back now would be to submit to my cowardice, and I am tired of being a coward.
