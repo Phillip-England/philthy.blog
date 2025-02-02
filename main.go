@@ -193,7 +193,10 @@ func NewMarkdownFileFromPath(path string) (*MarkdownFile, error) {
 	}
 	fileName := strings.Split(path, "/")[1]
 	fileNumber := strings.Split(fileName, "_")[0]
-	fileTitle := strings.Split(strings.Split(fileName, "_")[1], ".")[0]
+	fileNameWithoutExtension := strings.Split(fileName, ".")[0]
+	fileTitleWithUnderscoresSlice := strings.Split(fileNameWithoutExtension, "_")[1:]
+	fileTitleWithUnderscores := strings.Join(fileTitleWithUnderscoresSlice, " ")
+	fileTitle := strings.Replace(fileTitleWithUnderscores, "_", " ", 1)
 	fileTitle = strings.ReplaceAll(fileTitle, "_", " ")
 	imagePath := strings.Replace(path, "posts", "/static/post_img", 1)
 	imagePath = strings.Replace(imagePath, ".md", ".webp", 1)
@@ -255,7 +258,7 @@ func CreatePostsMdFile(mdFiles []*MarkdownFile) error {
 	defer file.Close()
 	file.WriteString("## All Posts\n")
 	for _, mdFile := range mdFiles {
-		file.WriteString(fmt.Sprintf(`%s. [%s](%s) *%s*`, mdFile.PostNumber, mdFile.Title, mdFile.Href, mdFile.DateWritten))
+		file.WriteString(fmt.Sprintf(`%s. [%s](%s) *%s*`, mdFile.PostNumber, mdFile.Title, mdFile.Href, mdFile.DateWritten) + "\n")
 	}
 	return nil
 }

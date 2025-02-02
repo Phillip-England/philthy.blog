@@ -1,5 +1,6 @@
 ## Recent Posts
 0. [Dedicated](/post/0) *1/20/2025*
+1. [Barriers To Exit](/post/1) *2/2/2025*
 
 ## Why Am I Writing?
 I am writing because I aim to bring hope and comfort to those experiencing the loss of their Christian faith. Losing your faith can be catastrophic. The amount of fear and isolation that comes with the process can leave someone wishing they were never born. And so when you feel alone, I want you to know that you are not the only one going through this.
