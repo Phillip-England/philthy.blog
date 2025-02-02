@@ -7,21 +7,6 @@
     <link rel="stylesheet" href="/static/css/output.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <custom-scroll></custom-scroll>
-    <script>
-        document.documentElement.classList.toggle('dark', localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches))
-        window.addEventListener("DOMContentLoaded", () => {
-            let sun = document.getElementById("sun");
-            let moon = document.getElementById("moon");
-            sun.addEventListener("click", () => {
-                localStorage.theme = "light";
-                document.documentElement.classList.toggle("dark");
-            });
-            moon.addEventListener("click", () => {
-                localStorage.theme = "dark";
-                document.documentElement.classList.toggle("dark");
-            });
-        });
-    </script>
     <title>{{ .Title }}</title>
 </head>
 <body class="h-screen flex flex-col dark:bg-black bg-white custom-scroll text-black dark:text-white">
@@ -34,7 +19,7 @@
         </div>
         <div>
             <div class="flex flex-row gap-4">
-                <svg id="play" class="w-8 h-8 cursor-pointer text-red-500" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <svg id="record" class="w-8 h-8 cursor-pointer text-red-500" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="12" cy="12" r="10" />
                 </svg>
                 <svg id="stop" class="w-8 h-8 cursor-pointer hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -59,144 +44,16 @@
 
 	<div class="h-[65px]"></div>
 
-	<div id="logo" class="top-[125px] left-[70px] w-[200px] fixed">
+	<div id="logo" class="top-[125px] left-[70px] w-[200px] fixed hidden xl:flex">
 		<img class="dark:hidden" src="/static/img/logo-black.svg"/>
 		<img class="dark:flex hidden" src="/static/img/logo-white.svg"/>
 	</div>
 
-    <main class="p-12 flex flex-row items-center justify-center w-full text-[128px]">
-		<div id="whiteboard" class="block flex-1 ml-[25%]">
+    <main class="p-12 flex flex-row items-center justify-center w-full text-[48px] lg:text-[128px]">
+		<div id="whiteboard" class="block flex-1 xl:ml-[25%]">
 
 		</div>
     </main>
-
-    <script>
-
-        let expand = document.querySelector('#expand');
-        let compress = document.querySelector('#compress');
-        const play = document.querySelector('#play');
-        const stop = document.querySelector('#stop');
-        const whiteboard = document.querySelector('#whiteboard');
-    
-        let recognition = null; // Make recognition globally accessible
-        let isShuttingDown = false; // To prevent restarting when stopping
-    
-        expand.addEventListener('click', () => {
-            expand.classList.remove('flex');
-            expand.classList.add('hidden');
-            compress.classList.remove('hidden');
-            compress.classList.add('flex');
-    
-            // Enter full-screen mode
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { // safari
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) { // ie/edge
-                document.documentElement.msRequestFullscreen();
-            } else {
-                console.warn('Fullscreen mode is not supported by this browser.');
-            }
-        });
-    
-        compress.addEventListener('click', () => {
-            compress.classList.add('hidden');
-            compress.classList.remove('flex');
-            expand.classList.remove('hidden');
-            expand.classList.add('flex');
-    
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) { // safari
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) { // ie/edge
-                document.msExitFullscreen();
-            } else {
-                console.warn('Exiting full-screen mode is not supported by this browser.');
-            }
-        });
-    
-        play.addEventListener('click', () => {
-            play.classList.add('hidden');
-            stop.classList.remove('hidden');
-            startSpeechRecognition();
-        });
-    
-        stop.addEventListener('click', () => {
-            play.classList.remove('hidden');
-            stop.classList.add('hidden');
-            stopSpeechRecognition();
-        });
-    
-        function startSpeechRecognition() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                console.warn('Speech recognition not supported in this browser.');
-                whiteboard.innerHTML = '<p class="text-red-500">Speech recognition is not supported in this browser.</p>';
-                return;
-            }
-    
-            recognition = new SpeechRecognition();
-            recognition.continuous = true;
-            recognition.interimResults = true;
-            recognition.lang = 'en-US';
-            let finalTranscript = '';
-            let retryCount = 0;
-            const MAX_RETRIES = 3;
-    
-            recognition.onresult = (event) => {
-                let interimTranscript = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    const result = event.results[i];
-                    if (result.isFinal) {
-                        finalTranscript += result[0].transcript.trim() + ' ';
-                    } else {
-                        interimTranscript += result[0].transcript;
-                    }
-                }
-                const fullTranscript = (finalTranscript + interimTranscript).replace(/\bfilthy\b/gi, 'philthy').replace(/\bphilip\b/gi, 'phillip');
-    
-                const words = fullTranscript.trim().split(' ');
-                const lastWord = words.pop();
-                whiteboard.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth'
-                });
-            };
-    
-            recognition.onerror = (event) => {
-                console.error('Speech recognition error:', event.error);
-            };
-    
-            recognition.onend = () => {
-                if (!isShuttingDown) {
-                    recognition.start();
-                }
-            };
-    
-            recognition.start();
-            console.log('Speech recognition started. Speak into the microphone.');
-        }
-    
-        function stopSpeechRecognition() {
-            if (recognition) {
-                isShuttingDown = true;
-                recognition.stop(); 
-                recognition = null; 
-            }
-            whiteboard.innerHTML = '';
-            console.log('Speech recognition stopped and whiteboard cleared.');
-            setTimeout(() => {
-                whiteboard.innerHTML = '';
-                console.log('Whiteboard cleared again after 500ms delay.');
-            }, 500);
-
-            isShuttingDown = false;
-        }
-        
-    </script>
-    
 
     <script src="/static/js/index.js"></script>
 </body>

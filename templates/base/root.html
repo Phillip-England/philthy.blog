@@ -9,21 +9,6 @@
 	<script src="https://unpkg.com/hyperscript.org@0.9.13" async></script>
     <link rel="stylesheet" href="/static/css/output.css">
     <custom-scroll></custom-scroll> 
-    <script>
-        document.documentElement.classList.toggle('dark', localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches))
-        window.addEventListener("DOMContentLoaded", () => {
-            let sun = document.getElementById("sun");
-            let moon = document.getElementById("moon");
-            sun.addEventListener("click", () => {
-                localStorage.theme = "light";
-                document.documentElement.classList.toggle("dark");
-            });
-            moon.addEventListener("click", () => {
-                localStorage.theme = "dark";
-                document.documentElement.classList.toggle("dark");
-            });
-        });
-    </script>
     <hash-title-scroll offset='-140'></hash-title-scroll>
     <title>{{ .Title }}</title>
 </head>
@@ -42,7 +27,7 @@
                     <p class='text-xs text-gray-600 dark:text-gray-400'>{{ .DateWritten }}</p>
                     </div>
                     <p class='text-sm'>{{ .SubText }}<the-blinker rate="1000"></the-blinker></p>
-                    <img src="{{ .ImageSrc }}" class="w-[150px] rounded" alt="An image to represent this blog post" />
+                    <img src="{{ .ImageSrc }}" width="150" height="150" class="w-[150px] h-[150px] rounded" alt="An image to represent this blog post" />
                     <random-beads count='12' class="pb-6"></random-beads>
                 </div>
                     <tw-markdown>
@@ -53,7 +38,7 @@
     </div>
 
     <aside>
-        <title-links target='#article' offset="-140" link-wrapper-class="flex" link-class="p-4 w-full hover:underline border-b border-gray-200 dark:border-gray-800" class="fixed scrollbar-hidden overflow-y-scroll top-0 z-50 right-0 hidden xl:flex text-sm p-4 flex-col text-gray-600 dark:text-gray-400 h-full dark:bg-black bg-white hidden xl:w-[20%] xl:max-w-[300px]"></title-links>
+        <title-links target='#article' offset="-140" link-wrapper-class="flex" link-class="p-4 w-full hover:underline border-b border-gray-200 dark:border-gray-800" class="fixed scrollbar-hidden overflow-y-scroll top-0 z-40 right-0 hidden xl:flex text-sm p-4 flex-col text-gray-600 dark:text-gray-400 h-full dark:bg-black bg-white hidden xl:w-[20%] xl:max-w-[300px]"></title-links>
     </aside>
 
     <script src="/static/js/index.js"></script>

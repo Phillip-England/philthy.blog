@@ -44,6 +44,6 @@ Despite the outward appearance of Christianity being open and inviting to questi
 
 I discovered that Christianity is what Christians say it is. You can read your Bible, and if you guarded yourself from outside influence, the interpretation you walk away with will be starkly different than the interpretation of another who's done the same. And both readers may find themselves feeling like their perspective is a gift from the divine.
 
-Because questioning felt so scary, I started to believe it was the right thing to do. The scariest things in life have the most potential to grow my character. I remember hearing Matt Delahunty say, "Is fear a good reason to believe in something?"
+Because questioning felt so scary, I started to believe it was the right thing to do. The scariest things in life have the most potential to grow my character. I remember hearing Matt Dillahunty say, "Is fear a good reason to believe in something?"
 
 Once I recognized that fear was not a good reason to believe something, I knocked everything off the table and started from ground zero. And I've been scared ever since.
