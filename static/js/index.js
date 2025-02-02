@@ -601,7 +601,7 @@ class DarkModeToggler {
 // path specific code
 //===============================
 
-const path = window.location.pathname
+const path = window.location.pathname.replace('.html', '')
 
 // runs on all page loads
 new DarkModeToggler('#sun', '#moon')
