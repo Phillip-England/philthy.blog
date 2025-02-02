@@ -44,7 +44,7 @@ And when others pointed out 1 Peter 5:7 (NIV), I thought myself alone in my grea
     Cast all your anxiety on him because he cares for you.
 </bible-quote>
 
-These ideas weight on me. The process of sanctification left my exhausted. Then, to make matters worse, I would read verses like Revelation 3:16:
+These ideas weigh on me. The process of sanctification left my exhausted. Then, to make matters worse, I would read verses like Revelation 3:16:
 
 <bible-quote title="Revelation 3:16" translation="NIV">
     So I will spit you out of my mouth, because you are only warm and not hot or cold. 

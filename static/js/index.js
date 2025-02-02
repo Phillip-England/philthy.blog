@@ -449,123 +449,149 @@ class FullScreenToggle {
     }
 }
 
-class AudioWhiteboard { 
+class AudioWhiteboard {
     constructor(recordSelector, stopSelector, whiteboardSelector) {
-        this.record = document.querySelector(recordSelector)
-        this.stop = document.querySelector(stopSelector)
-        this.whiteboard = document.querySelector(whiteboardSelector)
-        this.errorMode = false
-        this.shutdownMode = false
-        this.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-        this.recognition = null
-        this.finalTranscript = ''
-        this.retryCount = 0
-        this.maxRetries = 3
-        this.hookRecord()
-        this.hookStop()
+        this.record = document.querySelector(recordSelector);
+        this.stop = document.querySelector(stopSelector);
+        this.whiteboard = document.querySelector(whiteboardSelector);
+        this.errorMode = false;
+        this.shutdownMode = false;
+        this.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        this.recognition = null;
+        this.finalTranscript = '';
+        this.retryCount = 0;
+        this.maxRetries = 3;
+        this.restartInterval = null;
+        this.hookRecord();
+        this.hookStop();
     }
+    
     toggleButtons() {
-        this.record.classList.toggle('hidden')
-        this.stop.classList.toggle('hidden')
+        this.record.classList.toggle('hidden');
+        this.stop.classList.toggle('hidden');
     }
+    
     resetButtons() {
-        this.record.classList.remove('hidden')
-        this.stop.classList.add('hidden')
+        this.record.classList.remove('hidden');
+        this.stop.classList.add('hidden');
     }
+    
     clearWhiteboard() {
-        this.whiteboard.innerHTML = ``
+        this.whiteboard.innerHTML = ``;
     }
+    
     setError(msg) {
-        this.whiteboard.innerHTML = `<p class='text-red-500'>${msg}</p>`
-        console.warn(msg)
+        this.whiteboard.innerHTML = `<p class='text-red-500'>${msg}</p>`;
+        console.warn(msg);
     }
+    
+    startRecognition() {
+        if (!this.SpeechRecognition) {
+            this.errorMode = true;
+            this.setError("Speech recognition not supported in this browser.");
+            setTimeout(() => {
+                this.clearWhiteboard();
+                this.resetButtons();
+                this.errorMode = false;
+            }, 2000);
+            return;
+        }
+        
+        this.recognition = new this.SpeechRecognition();
+        this.recognition.continuous = true;
+        this.recognition.interimResults = true;
+        this.recognition.lang = 'en-US';
+        
+        this.recognition.onresult = (event) => {
+            if (this.shutdownMode) return;
+            
+            let interimTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const result = event.results[i];
+                if (result.isFinal) {
+                    this.finalTranscript += result[0].transcript.trim() + ' ';
+                } else {
+                    interimTranscript += result[0].transcript;
+                }
+            }
+            
+            const fullTranscript = (this.finalTranscript + interimTranscript)
+                .replace(/\bfilthy\b/gi, 'philthy')
+                .replace(/\bphilip\b/gi, 'phillip');
+            
+            const words = fullTranscript.trim().split(' ');
+            const lastWord = words.pop();
+            this.whiteboard.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
+            
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        };
+        
+        this.recognition.onerror = (event) => {
+            this.errorMode = true;
+            this.setError("Do you have a microphone plugged in or some way to capture audio?");
+            setTimeout(() => {
+                this.clearWhiteboard();
+                this.resetButtons();
+                this.errorMode = false;
+            }, 2000);
+        };
+        
+        this.recognition.onend = () => {
+            if (!this.shutdownMode) {
+                console.log('Restarting recognition to prevent timeout.');
+                this.startRecognition();
+            }
+        };
+        
+        this.recognition.start();
+        console.log('Speech recognition started. Speak into the microphone.');
+    }
+    
     hookRecord() {
         this.record.addEventListener('click', () => {
             if (this.errorMode) {
-                console.warn('cannot record in error mode, wait a second')
-                return
+                console.warn('Cannot record in error mode, wait a second');
+                return;
             }
-            this.clearWhiteboard()
-            this.finalTranscript = ''
-            this.toggleButtons()
-            // checking if speech recognition is supported
-            if (!this.SpeechRecognition) {
-                this.errorMode = true
-                this.setError("Speech recognition not supported in this browser.")
-                setTimeout(() => {
-                    this.clearWhiteboard()
-                    this.resetButtons()
-                    this.errorMode = false
-                }, 2000)
-                return
-            }
-            // setting up recognition details
-            this.recognition = new this.SpeechRecognition
-            this.recognition.continuous = true
-            this.recognition.interimResults = true
-            this.recognition.lang = 'en-US'
-            // this is what happens when audio data is received
-            this.recognition.onresult = (event) => {
-                if (this.shutdownMode) {
-                    console.warn('shutting down recording, no more audio can be captured at this moment')
-                    return
+            
+            this.clearWhiteboard();
+            this.finalTranscript = '';
+            this.toggleButtons();
+            this.shutdownMode = false;
+            this.startRecognition();
+            
+            this.restartInterval = setInterval(() => {
+                if (this.recognition) {
+                    console.log('Manually restarting recognition to avoid timeout.');
+                    this.recognition.stop();
                 }
-                let interimTranscript = ''
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    const result = event.results[i];
-                    if (result.isFinal) {
-                        this.finalTranscript += result[0].transcript.trim() + ' ';
-                    } else {
-                        interimTranscript += result[0].transcript;
-                    }
-                }
-                const fullTranscript = (this.finalTranscript + interimTranscript).replace(/\bfilthy\b/gi, 'philthy').replace(/\bphilip\b/gi, 'phillip');
-                const words = fullTranscript.trim().split(' ');
-                const lastWord = words.pop();
-                if (this.shutdownMode) {
-                    // only write to the whiteboard when we are not shutting down
-                } else {
-                    this.whiteboard.innerHTML = `${words.join(' ')} <span class="text-red-500">${lastWord}</span>`;
-                }
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth'
-                }); 
-            }
-            // this is what happens when a speech recognition error is received
-            this.recognition.onerror = (event) => {
-                this.errorMode = true
-                this.setError(`Do you have a microphone plugged in or some way to capture audio?`)
-                setTimeout(() => {
-                    this.clearWhiteboard()
-                    this.resetButtons()
-                    this.errorMode = false
-                }, 2000)
-            };
-            // starting speech recognition
-            this.recognition.start()
-            console.log('Speech recognition started. Speak into the microphone.');
-        })
+            }, 4 * 60 * 1000); // Restart every 4 minutes
+        });
     }
+    
     hookStop() {
         this.stop.addEventListener('click', () => {
             if (this.errorMode) {
-                console.warn('cannot stop recording in error mode, wait a second')
-                return
+                console.warn('Cannot stop recording in error mode, wait a second');
+                return;
             }
-            this.shutdownMode = true
+            
+            this.shutdownMode = true;
+            clearInterval(this.restartInterval);
+            
             if (this.recognition) {
-                this.recognition.stop()
-                this.recognition = null
+                this.recognition.stop();
+                this.recognition = null;
             }
-            this.resetButtons()
-            this.clearWhiteboard()
+            
+            this.resetButtons();
+            this.clearWhiteboard();
             setTimeout(() => {
-                this.clearWhiteboard()
-            }, 200)
-            this.shutdownMode = false
-            console.log('speech recognition has stopped')
-        })
+                this.clearWhiteboard();
+            }, 200);
+            
+            console.log('Speech recognition has stopped.');
+        });
     }
 }
 
