@@ -527,6 +527,7 @@ class AudioWhiteboard {
         };
         
         this.recognition.onerror = (event) => {
+            this.retryCount++
             this.errorMode = true;
             this.setError("Do you have a microphone plugged in or some way to capture audio?");
             setTimeout(() => {
@@ -537,6 +538,10 @@ class AudioWhiteboard {
         };
         
         this.recognition.onend = () => {
+            if (this.retryCount >= this.maxRetries) {
+                console.log('hit max retries, ending..')
+                return
+            }
             if (!this.shutdownMode) {
                 console.log('Restarting recognition to prevent timeout.');
                 this.startRecognition();
@@ -553,7 +558,8 @@ class AudioWhiteboard {
                 console.warn('Cannot record in error mode, wait a second');
                 return;
             }
-            
+        
+            this.retryCount = 0
             this.clearWhiteboard();
             this.finalTranscript = '';
             this.toggleButtons();
