@@ -59,15 +59,16 @@ func main() {
 		}
 		if r.URL.Path == "/" {
 			vbf.ExecuteTemplate(w, templates, "root.html", BaseTemplate{
-				Title:           "Welcome - " + TitleCatchPhrase,
-				Content:         template.HTML(mdContent),
-				ReqPath:         r.URL.Path,
-				ArticleName:     "philthy.blog",
-				SubText:         "Saying the things I'm afraid to say",
-				ImageSrc:        "./static/img/profile-sm.png",
-				DateWritten:     "1/20/2025",
-				MetaDescription: "Philthy Blog: A heartfelt exploration of Christianity, doubt, and the personal struggle with faith and God. Join an honest journey seeking truth, understanding, and peace.",
-				MetaKeywords:    "Christianity, God, Faith",
+				Title:            "Welcome - " + TitleCatchPhrase,
+				Content:          template.HTML(mdContent),
+				ReqPath:          r.URL.Path,
+				ArticleName:      "philthy.blog",
+				SubText:          "Saying the things I'm afraid to say",
+				ImageSrc:         "./static/img/profile-sm.png",
+				DateWritten:      "1/20/2025",
+				MetaDescription:  "Philthy Blog: A heartfelt exploration of Christianity, doubt, and the personal struggle with faith and God. Join an honest journey seeking truth, understanding, and peace.",
+				MetaKeywords:     "Christianity, God, Faith",
+				EmbeddedVideoSrc: "https://www.youtube.com/embed/k8S1DCdhneQ?si=1L3ZlcHVjXJ24RvK",
 			})
 		} else {
 			vbf.WriteString(w, "404 not found")
@@ -104,15 +105,16 @@ func main() {
 		}
 		mdFile := mdFiles[postNumber]
 		vbf.ExecuteTemplate(w, templates, "root.html", BaseTemplate{
-			Title:           mdFile.Title + " - " + TitleCatchPhrase,
-			Content:         mdFile.Content,
-			ReqPath:         r.URL.Path,
-			ArticleName:     mdFile.Title,
-			SubText:         mdFile.SubText,
-			ImageSrc:        mdFile.ImagePath,
-			DateWritten:     mdFile.DateWritten,
-			MetaDescription: "Philthy Blog: " + mdFile.MetaDescription,
-			MetaKeywords:    mdFile.MetaKeywords,
+			Title:            mdFile.Title + " - " + TitleCatchPhrase,
+			Content:          mdFile.Content,
+			ReqPath:          r.URL.Path,
+			ArticleName:      mdFile.Title,
+			SubText:          mdFile.SubText,
+			ImageSrc:         mdFile.ImagePath,
+			DateWritten:      mdFile.DateWritten,
+			MetaDescription:  "Philthy Blog: " + mdFile.MetaDescription,
+			MetaKeywords:     mdFile.MetaKeywords,
+			EmbeddedVideoSrc: mdFile.EmbeddedVideoSrc,
 		})
 
 	}, vbf.MwLogger)
@@ -136,28 +138,30 @@ type ScreenplayTemplate struct {
 }
 
 type BaseTemplate struct {
-	Title           string
-	Content         template.HTML
-	ReqPath         string
-	ArticleName     string
-	SubText         string
-	ImageSrc        string
-	DateWritten     string
-	MetaDescription string
-	MetaKeywords    string
+	Title            string
+	Content          template.HTML
+	ReqPath          string
+	ArticleName      string
+	SubText          string
+	ImageSrc         string
+	DateWritten      string
+	MetaDescription  string
+	MetaKeywords     string
+	EmbeddedVideoSrc string
 }
 
 type MarkdownFile struct {
-	Path            string
-	ImagePath       string
-	Title           string
-	PostNumber      string
-	Content         template.HTML
-	Href            string
-	SubText         string
-	DateWritten     string
-	MetaDescription string
-	MetaKeywords    string
+	Path             string
+	ImagePath        string
+	Title            string
+	PostNumber       string
+	Content          template.HTML
+	Href             string
+	SubText          string
+	DateWritten      string
+	MetaDescription  string
+	MetaKeywords     string
+	EmbeddedVideoSrc string
 }
 
 func NewMarkdownFilesFromDir(dir string) ([]*MarkdownFile, error) {
@@ -209,8 +213,13 @@ func NewMarkdownFileFromPath(path string) (*MarkdownFile, error) {
 	var dob string
 	var metaDescription string
 	var metaKeywords string
+	var videoSrc string
 	metaDataElm.Find("*").Each(func(i int, sel *goquery.Selection) {
 		key, _ := sel.Attr("key")
+		if key == "video-src" {
+			val, _ := sel.Attr("value")
+			videoSrc = val
+		}
 		if key == "subtext" {
 			val, _ := sel.Attr("value")
 			subText = val
@@ -229,16 +238,17 @@ func NewMarkdownFileFromPath(path string) (*MarkdownFile, error) {
 		}
 	})
 	file = &MarkdownFile{
-		Path:            path,
-		PostNumber:      fileNumber,
-		Title:           fileTitle,
-		Content:         template.HTML(mdContent),
-		ImagePath:       imagePath,
-		Href:            "/post/" + fileNumber,
-		SubText:         subText,
-		DateWritten:     dob,
-		MetaDescription: metaDescription,
-		MetaKeywords:    metaKeywords,
+		Path:             path,
+		PostNumber:       fileNumber,
+		Title:            fileTitle,
+		Content:          template.HTML(mdContent),
+		ImagePath:        imagePath,
+		Href:             "/post/" + fileNumber,
+		SubText:          subText,
+		DateWritten:      dob,
+		MetaDescription:  metaDescription,
+		MetaKeywords:     metaKeywords,
+		EmbeddedVideoSrc: videoSrc,
 	}
 	return file, nil
 }

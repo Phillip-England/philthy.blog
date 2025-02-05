@@ -30,6 +30,13 @@
                     <img src="{{ .ImageSrc }}" width="150" height="150" class="w-[150px] h-[150px] rounded" alt="An image to represent this blog post" />
                     <random-beads count='12' class="pb-6"></random-beads>
                 </div>
+                    {{ if strEquals .EmbeddedVideoSrc "" }}
+
+                    {{ else }}                    
+                        <div class="aspect-video w-full rounded">
+                            <iframe class="h-full w-full" src="{{ .EmbeddedVideoSrc }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    {{ end }}
                     <tw-markdown>
                         {{ .Content }}
                     </tw-markdown>
