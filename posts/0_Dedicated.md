@@ -3,7 +3,7 @@
     <div key='dob' value='1/20/2025'></div>
     <div key='description' value='My Christian faith and deconstruction has left me without a clear idea of who or what God is. I still believe in God, and so in this article I recommit myself to God in the best way that I know how.'></div>
     <div key='keywords' value='God, Faith, Recommitment'></div>
-    <div key='video-src' value='https://www.youtube.com/embed/j5dnseXMfho?si=g8FtEYmcf7UWxc1t'>
+    <div key='video-src' value='https://www.youtube.com/embed/j5dnseXMfho?si=g8FtEYmcf7UWxc1t'></div>
 </div>
 
 
