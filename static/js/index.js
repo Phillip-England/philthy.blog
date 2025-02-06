@@ -130,6 +130,7 @@ class TwMarkdown extends HTMLElement {
         );
         break;
       case "a":
+        element.setAttribute('target', '_blank')
         element.classList.add(
           "text-blue-800",
           "underline",
