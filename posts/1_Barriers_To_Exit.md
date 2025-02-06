@@ -3,6 +3,7 @@
     <div key='dob' value='2/2/2025'></div>
     <div key='description' value="Is leaving Christianity easy? For me, it wasn't. It was one of the most difficult things I have ever faced, and I am still actively walking through it. In this piece, I walk through the idea of 'Barriers to Exit' which are forces within a belief system which exists as a mean to prevent people from leaving. Enjoy."></div>
     <div key='keywords' value='God, Faith, Deconstruction, Doubt, Faith Crisis, Fear, Religion, Christianity, Belief'></div>
+    <div key='video-src' value='https://www.youtube.com/embed/jsKmjsceNkU?si=M18EXjVcLkSFodvC'></div>
 </div>
 
 
